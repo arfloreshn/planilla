@@ -14,12 +14,8 @@
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <mockito-core.version>3.1.0</mockito-core.version>
-        <junit-jupiter.version>5.5.0</junit-jupiter.version>
         <all-themes.version>1.0.10</all-themes.version>
         <primefaces.version>7.0</primefaces.version>
-        <omnifaces.version>3.3</omnifaces.version>
-        <microprofile.version>3.0</microprofile.version>
         <javaee-api.version>8.0</javaee-api.version>
     </properties>
 
@@ -50,11 +46,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.omnifaces</groupId>
-            <artifactId>omnifaces</artifactId>
-            <version>${omnifaces.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>${primefaces.version}</version>
@@ -63,18 +54,6 @@
             <groupId>org.primefaces.themes</groupId>
             <artifactId>all-themes</artifactId>
             <version>${all-themes.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit-jupiter.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito-core.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
