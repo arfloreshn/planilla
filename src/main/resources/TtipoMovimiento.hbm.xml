@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-13-2019 10:15:55 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="planilla" name="modelo.TtipoMovimiento" optimistic-lock="version" table="ttipo_movimiento">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="desc" type="string">
+      <column length="50" name="desc" not-null="true"/>
+    </property>
+    <property name="tipo" type="string">
+      <column length="2" name="tipo" not-null="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="movimientos" table="emp_movimiento">
+      <key>
+        <column name="id_mov" not-null="true"/>
+      </key>
+      <one-to-many class="modelo.EmpMovimiento"/>
+    </set>
+  </class>
+</hibernate-mapping>

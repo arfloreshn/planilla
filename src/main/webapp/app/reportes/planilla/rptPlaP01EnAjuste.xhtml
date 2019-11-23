@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    >
+
+    <h:head>
+
+    </h:head>
+    <h:body>
+              <ui:composition template="../../../WEB-INF/plantillas/formLayout.xhtml">
+
+            <ui:define name="content">
+                <section>
+
+                    <h:form id="reporte">
+                        <h:panelGrid columns="6">
+                            <p:outputLabel value="Fecha desde"/>
+                            <p:datePicker value="#{reportesBeans.fdesde}" showButtonBar="true" pattern="dd/MM/yyyy" />
+                            <p:outputLabel value="Fec. Hasta"/>
+                            <p:datePicker  value="#{reportesBeans.fhasta}" showButtonBar="true" pattern="dd/MM/yyyy"/>
+                            <h:commandButton value="iReport" class="btn btn-primary" actionListener="#{reportesBeans.rptCumpleaneros()}"/>
+
+                        </h:panelGrid>
+
+                    </h:form>
+                </section>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

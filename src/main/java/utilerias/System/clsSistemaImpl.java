@@ -1,0 +1,78 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package utilerias.System;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Date;
+import utilerias.jodbc.dbConexcion;
+
+/**
+ *
+ * @author AllanRamiro
+ */
+public class clsSistemaImpl implements clsSistema  {
+
+    
+     private String sql = "";
+     private ResultSet rs = null;
+     private Statement st;
+     private Connection con = null;
+     public Date fechaSistema = null;
+     private int var_nro_correlativo = 0;
+     
+     @Override
+    public Date getFechaHoy() {
+    try {
+            this.con = dbConexcion.getConnection();
+             st = con.createStatement();
+             sql = "SELECT CURDATE()"; 
+             this.rs = st.executeQuery(sql);
+              while (rs.next()) {
+               fechaSistema  =  rs.getDate(1);
+             }
+            con.close();
+         } catch (SQLException ex) {
+            ex.getMessage();
+        } 
+      return fechaSistema;
+	
+    }
+
+    @Override
+    public Timestamp getFechaHoraHoy() {
+        long ms =  getFechaHoy().getTime();
+        java.sql.Timestamp ts = new java.sql.Timestamp(ms);
+        return ts;
+    }
+
+    @Override
+    public Timestamp getDateTime(Date var_fecha) {
+        java.sql.Timestamp ts = new java.sql.Timestamp(var_fecha.getTime());
+        return ts;
+    }
+    
+    
+    public int NroCorrelativo(String Tabla) throws Exception {
+
+        String sSql = "";
+
+        sSql = "SELECT fn_correlativo('" + Tabla + "')";
+        CallableStatement cs = dbConexcion.getConnection().prepareCall(sSql);
+        ResultSet rs = cs.executeQuery();
+        while (rs.next()) {
+            this.var_nro_correlativo = rs.getInt(1); // return value
+        }
+        cs.close();
+
+        return this.var_nro_correlativo;
+    }
+
+}

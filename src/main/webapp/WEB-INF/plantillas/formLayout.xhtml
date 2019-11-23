@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <!-- NO AGREGAR f:View en ninguna parte de este formulario, genera problemas en primefaces-->
+  
+    <h:head>
+
+          <!-- PrimeFlexBox -->
+        <link href="#{homeBean.homeUrl}/resources/css/primeflexbox.css" rel="stylesheet"/>
+        <!-- Bootstrap Core CSS -->
+        <link href="#{homeBean.homeUrl}/resources/css/bootstrap.min.css" rel="stylesheet"/>
+        <!-- Custom Fonts -->
+        <link href="#{homeBean.homeUrl}/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Custom CSS -->
+        <link href="#{homeBean.homeUrl}/resources/css/startmin.css" rel="stylesheet"/>
+        
+        <title>Planilla</title>
+        <f:facet name="first">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <meta http-equiv="pragma" content="no-cache"/>
+            <meta http-equiv="cache-control" content="no-cache"/>
+            <meta http-equiv="expires" content="0"/>
+        </f:facet>
+        
+     </h:head>
+
+    <h:body>
+        <div id="encabezado" class="ui-widget-header">
+                <ui:insert name="header" >
+                    <ui:include src="formHeader.xhtml" />
+                </ui:insert>
+        </div>
+
+        <div id="cuerpo">
+            <div id="lateral">
+                <ui:insert name="west" >
+                    <ui:include src="formmenu.xhtml" />
+                </ui:insert>
+            </div>
+
+            <div id="contenido">
+                <ui:insert name="content" >
+                    <ui:include src="formContent.xhtml" />
+                </ui:insert>
+            </div>
+        </div>
+    </h:body>
+
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-11-2019 09:41:57 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.TdeptoPais" table="tdepto_pais" catalog="planilla" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tpais" class="modelo.Tpais" fetch="select">
+            <column name="id_pais" not-null="true" />
+        </many-to-one>
+        <property name="nomDepto" type="string">
+            <column name="nom_depto" length="50" not-null="true" />
+        </property>
+        <set name="empMaes" table="emp_mae" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_depto_pais" not-null="true" />
+            </key>
+            <one-to-many class="modelo.EmpMae" />
+        </set>
+        <set name="tmunicipioses" table="tmunicipios" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_depto_pais" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Tmunicipios" />
+        </set>
+    </class>
+</hibernate-mapping>

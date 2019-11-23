@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-13-2019 07:40:16 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Usuario" table="usuario" catalog="planilla" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="rol" class="modelo.Rol" fetch="select">
+            <column name="id_rol" not-null="true" />
+        </many-to-one>
+        <property name="usuario" type="string">
+            <column name="usuario" length="30" not-null="true" />
+        </property>
+        <property name="clave" type="string">
+            <column name="clave" length="30" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="50" />
+        </property>
+        <property name="estado" type="java.lang.Byte">
+            <column name="estado" />
+        </property>
+        <property name="usuariocreado" type="string">
+            <column name="usuariocreado" length="20" />
+        </property>
+        <property name="fechacreacion" type="timestamp">
+            <column name="fechacreacion" length="19" />
+        </property>
+        <property name="usuariomodifica" type="string">
+            <column name="usuariomodifica" length="20" />
+        </property>
+        <property name="fechamodifica" type="timestamp">
+            <column name="fechamodifica" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

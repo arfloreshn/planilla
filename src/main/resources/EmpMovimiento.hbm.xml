@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-02-2019 10:41:45 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.EmpMovimiento" table="emp_movimiento" catalog="planilla" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="empMae" class="modelo.EmpMae" fetch="select">
+            <column name="id_emp" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ttipoMovimiento" class="modelo.TtipoMovimiento" fetch="select">
+            <column name="id_mov" not-null="true" />
+        </many-to-one>
+        <property name="importe" type="double">
+            <column name="importe" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="snActivo" type="boolean">
+            <column name="sn_activo" not-null="true" />
+        </property>
+        <property name="snAcumula" type="boolean">
+            <column name="sn_acumula" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

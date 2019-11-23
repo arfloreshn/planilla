@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <head>
+        <title>Reporte de aniversarios</title>
+        <meta charset="utf-8"/>
+        <meta name="description" content="Reporte de aniversarios"/>
+        <meta name="author" content="Allan Ramiro Flores"/>
+    </head>
+    <ui:composition template="../../../WEB-INF/plantillas/formLayout.xhtml">
+        <ui:define name="content">
+            <section  style="margin-left: 400px; margin-top: 120px; height: 420px">
+
+                <h:form id="reporte" style="width: 35%; height: 40%">
+                    <p:panel header="Reporte de Aniversarios" > 
+
+                        <h:panelGrid columns="1">
+                            <p:outputLabel value="Ingrese el Nro de Mes:"/>
+                            <p:inputNumber value="#{rptAniversarioBeans.periodo}" decimalPlaces="0"></p:inputNumber>
+                        </h:panelGrid>
+                        <br/>
+                        <h:commandButton value="Imprimir" class="btn btn-primary" actionListener="#{rptAniversarioBeans.rptAniversarios()}"/>
+                        <h:commandButton value="Cancelar" style="margin-left: 7px" class="btn btn-primary" actionListener="#{rptAniversarioBeans.rptAniversarios()}"/>
+
+                    </p:panel>
+                </h:form>
+            </section>
+        </ui:define>
+
+    </ui:composition>
+
+
+</html>

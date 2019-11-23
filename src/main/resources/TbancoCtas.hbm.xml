@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-02-2019 10:41:45 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.TbancoCtas" table="tbanco_ctas" catalog="planilla" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbanco" class="modelo.Tbanco" fetch="select">
+            <column name="id_bco" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tmoneda" class="modelo.Tmoneda" fetch="select">
+            <column name="id_moneda" not-null="true" />
+        </many-to-one>
+        <property name="nroCtaBco" type="string">
+            <column name="nro_cta_bco" length="50" not-null="true" />
+        </property>
+        <set name="planMaeWkfs" table="plan_mae_wkf" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="id_cta_bco" not-null="true" />
+            </key>
+            <one-to-many class="modelo.PlanMaeWkf" />
+        </set>
+    </class>
+</hibernate-mapping>

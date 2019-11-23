@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-02-2019 10:41:45 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.PlanMaeWkf" table="plan_mae_wkf" catalog="planilla" optimistic-lock="version">
+        <id name="idPlan" type="java.lang.Integer">
+            <column name="id_plan" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="tbancoCtas" class="modelo.TbancoCtas" fetch="select">
+            <column name="id_cta_bco" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tmoneda" class="modelo.Tmoneda" fetch="select">
+            <column name="id_moneda" not-null="true" />
+        </many-to-one>
+        <property name="nroPlanilla" type="int">
+            <column name="nro_planilla" not-null="true" />
+        </property>
+        <property name="nroPeriodo" type="int">
+            <column name="nro_periodo" not-null="true" />
+        </property>
+        <property name="anioPeriodo" type="int">
+            <column name="anio_periodo" not-null="true" />
+        </property>
+        <property name="creadaPor" type="string">
+            <column name="creada_por" length="20" not-null="true" />
+        </property>
+        <property name="fecCreacion" type="timestamp">
+            <column name="fec_creacion" length="19" not-null="true" />
+        </property>
+        <property name="snRevisada" type="string">
+            <column name="sn_revisada" length="2" not-null="true" />
+        </property>
+        <property name="fecRevisa" type="timestamp">
+            <column name="fec_revisa" length="19" />
+        </property>
+        <property name="revisadaPor" type="string">
+            <column name="revisada_por" length="20" />
+        </property>
+        <property name="snAutorizada" type="string">
+            <column name="sn_autorizada" length="2" not-null="true" />
+        </property>
+        <property name="fecAutorizada" type="timestamp">
+            <column name="fec_autorizada" length="19" />
+        </property>
+        <property name="autorizadaPor" type="string">
+            <column name="autorizada_por" length="20" />
+        </property>
+        <property name="factorCambio" type="big_decimal">
+            <column name="factor_cambio" precision="12" scale="6" not-null="true" />
+        </property>
+        <property name="nroLineas" type="int">
+            <column name="nro_lineas" not-null="true" />
+        </property>
+        <property name="nroCheque" type="string">
+            <column name="nro_cheque" length="20" not-null="true" />
+        </property>
+        <property name="impCheque" type="big_decimal">
+            <column name="imp_cheque" precision="18" not-null="true" />
+        </property>
+        <property name="impChequeEq" type="big_decimal">
+            <column name="imp_cheque_eq" precision="18" not-null="true" />
+        </property>
+        <property name="snEnviada" type="string">
+            <column name="sn_enviada" length="2" not-null="true" />
+        </property>
+        <property name="fecEnviada" type="timestamp">
+            <column name="fec_enviada" length="19" />
+        </property>
+        <property name="enviadaPor" type="string">
+            <column name="enviada_por" length="20" />
+        </property>
+        <property name="snContabilizada" type="string">
+            <column name="sn_contabilizada" length="2" not-null="true" />
+        </property>
+        <property name="fecContabilizacion" type="timestamp">
+            <column name="fec_contabilizacion" length="19" />
+        </property>
+        <property name="contabilizadaPor" type="string">
+            <column name="contabilizada_por" length="20" />
+        </property>
+        <property name="fecAnulacion" type="timestamp">
+            <column name="fec_anulacion" length="19" />
+        </property>
+        <property name="anuladaPor" type="string">
+            <column name="anulada_por" length="20" />
+        </property>
+        <set name="planDetWkfs" table="plan_det_wkf" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_plan" not-null="true" />
+            </key>
+            <one-to-many class="modelo.PlanDetWkf" />
+        </set>
+         <set name="planResWkfs" table="plan_res_wkf" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_plan" not-null="true" />
+            </key>
+            <one-to-many class="modelo.PlanDetWkf" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,42 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+       "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+<!--    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property> -->
+    <property name="hibernate.dialect">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://bdpeofvhv3aoijwogi0i-mysql.services.clever-cloud.com:3306/bdpeofvhv3aoijwogi0i</property>
+    <property name="hibernate.connection.username">u05wnqtmcroamfee</property>
+    <property name="hibernate.connection.password">zjJ8FJWQuypQGpeBU1uH</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <mapping resource="EmpMae.hbm.xml"/>
+    <mapping resource="EmpCtaBco.hbm.xml"/>
+    <mapping resource="EmpMovimiento.hbm.xml"/>
+    <mapping resource="PlanMaeWkf.hbm.xml"/>
+    <mapping resource="PlanDetWkf.hbm.xml"/>
+    <mapping resource="PlanResWkf.hbm.xml"/>
+    <mapping resource="Menu.hbm.xml"/>
+    <mapping resource="Menurol.hbm.xml"/>
+    <mapping resource="Usuario.hbm.xml"/>
+    <mapping resource="Rol.hbm.xml"/>
+    <mapping resource="Tbanco.hbm.xml"/>
+    <mapping resource="TbancoCtas.hbm.xml"/>
+    <mapping resource="Tmoneda.hbm.xml"/>
+    <mapping resource="TdeptoPais.hbm.xml"/>
+    <mapping resource="TestadosApp.hbm.xml"/>
+    <mapping resource="Tmunicipios.hbm.xml"/>
+    <mapping resource="TdeptoEmp.hbm.xml"/>
+    <mapping resource="Tcargo.hbm.xml"/>
+    <mapping resource="Tprofesion.hbm.xml"/>
+    <mapping resource="TestadoCivil.hbm.xml"/>
+    <mapping resource="Tcorrelativos.hbm.xml"/>
+    <mapping resource="Tpais.hbm.xml"/>
+    <mapping resource="TtipoDocumento.hbm.xml"/>
+    <mapping resource="TtipoEmpleado.hbm.xml"/>
+    <mapping resource="TtipoMovimiento.hbm.xml"/>
+    <mapping resource="TtipoPlanilla.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

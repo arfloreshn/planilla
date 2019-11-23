@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+    </h:head>
+    <h:body>
+
+           <ui:composition template="../../../WEB-INF/plantillas/formLayout.xhtml">
+
+            <ui:define name="content">
+
+                <h:form id="main">
+
+                    <p:growl id="growl" showDetail="true"/>
+                    <p:fragment>
+                        <p:panel id="paneldatos" header="Deducciones por empleado">
+                            <h:panelGrid id="grDatos" columns="4">
+                                <p:outputLabel id="lblempleado" value="Id. empleado.:" style="margin-left: 5px"/>
+                                <p:inputText id="lblcodempleado" value="#{empleadosDeduccion.codEmpleado}">
+                                    <p:ajax listener="#{empleadosDeduccion.buscarEmpleado}" 
+                                            event="blur" update="cbodeduccion,lblnomEmp,tbdeducciones"
+                                            process="@this"/>
+                                </p:inputText>
+                                <p:commandButton value="..."></p:commandButton>
+
+                            </h:panelGrid>
+
+                            <div>
+                                <p:outputLabel id="lblnombre" value="Nombres.:" style="margin-top: 2px; height: 20px; margin-left: 20px; color:  #05a22f  "/> 
+                                <p:outputLabel id="lblnomEmp" value="#{empleadosDeduccion.empleados.primerApellido} #{empleadosDeduccion.empleados.segundoApellido} #{empleadosDeduccion.empleados.nombres}" style="margin-top: 2px; height: 20px; margin-left: 20px; color:  #05a22f  "/> 
+
+                            </div>
+
+
+                            <h:panelGrid columns="2">
+                                <p:outputLabel id="lbldeduccion" 
+                                               value="Deducción.:" style=" margin-top: 0px; margin-left: 15px"/>
+                                <p:pickList id="cbodeduccion"
+                                            effect="explode" 
+                                            effectSpeed="slow"
+                                            value="#{empleadosDeduccion.tipoDeducciones}" 
+                                            var="p"
+                                            itemLabel="#{p.desc}"
+                                            itemValue="#{p}"
+                                            converter="TtipoMovientoConvierte" 
+                                            style="margin-top: 5px;margin-left: 1px; width: 120px"
+                                            >
+                                    <f:facet name="sourceCaption">Listar Deducciones</f:facet>
+                                    <f:facet name="targetCaption">Asignar Deducción</f:facet>
+                                </p:pickList>
+                            </h:panelGrid>
+
+                            <div style="margin-left: 105px;">
+                                <p:commandButton value="Procesar deducciones"  style="width: 450px" action="#{empleadosDeduccion.grabarDeducciones()}" />
+                            </div>
+                        </p:panel>
+
+
+
+                    </p:fragment>
+
+                    <p:dataTable id="tbdeducciones" 
+                                 emptyMessage="No hay deducciones a mostrar" 
+                                 value="#{empleadosDeduccion.lstDeduccionesPorEmpleado}" 
+                                 var="obj"
+                                 rowKey="#{obj.id}"
+                                 editable="true"
+                                 editMode="row">
+
+
+                        <f:facet name="header">
+                            Valores Aplicados
+                        </f:facet>
+
+
+
+                        <p:ajax event="rowEdit"  listener="#{empleadosDeduccion.onRowEdit}" 
+                                update=":main:growl"/> 
+
+                        <p:column headerText="Acción" style="width: 1%;font-size: 10px">
+                            <p:rowEditor cancelTitle="Cancelar" saveTitle="Guardar" editTitle="Editar"/>
+                        </p:column>
+
+                        <p:column id="col3" headerText="Importe"  style="width:3%; font-size: 10px ">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText id="MuestroImporte" value="#{obj.importe}"> </h:outputText> 
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText id="IngresoImporte" 
+                                                 value="#{obj.importe}">
+                                        <f:convertNumber pattern="###,###.##" maxFractionDigits="2"></f:convertNumber>
+                                    </p:inputText>
+                                </f:facet>
+                            </p:cellEditor>
+
+                        </p:column>
+
+                        <p:column id="col4" headerText="Esta activa?" style="width:2%; font-size: 10px; " >
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <p:selectBooleanButton id="btn1"  style="margin-left: 20%"  offLabel="No"  onLabel="Si" value="#{obj.snActivo}" disabled="true" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:selectBooleanButton id="btn2" offLabel="No"  onLabel="Si" value="#{obj.snActivo}" />
+                                </f:facet>
+                            </p:cellEditor>
+
+                        </p:column>
+
+
+                        <p:column headerText="Descripción" style="width:7%; font-size: 10px ">
+                            <h:outputText value="#{obj.ttipoMoviento.desc}"> </h:outputText> 
+                        </p:column>
+
+                        <p:column  visible="false" headerText="No" style="width:7%; font-size: 10px ">
+                            <h:outputText value="#{obj.id}"> </h:outputText> 
+                        </p:column>
+
+
+                        <p:columnGroup type="footer">
+                            <p:row>
+                                <p:column colspan="2" style="text-align:right" footerText="Total:"/>
+                                <p:column footerText="Lps. #{empleadosDeduccion.mTotal}" />
+                            </p:row>
+                        </p:columnGroup>
+
+                    </p:dataTable>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>

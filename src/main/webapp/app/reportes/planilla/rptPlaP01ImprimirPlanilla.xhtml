@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    >
+
+    <h:head>
+
+    </h:head>
+    <h:body>
+           <ui:composition template="../../../WEB-INF/plantillas/formLayout.xhtml">
+
+            <ui:define name="content">
+
+                <section style="margin-left: 350px; margin-top: 80px; height: 480px;">
+
+                    <h:form id="reporte" style="width: 45%; height: 40%;">
+                        <p:panel header="Imprimir planilla">
+
+                            <h:panelGrid columns="1">
+                                <p:outputLabel value="Numero de Planilla"/>
+                                <p:inputNumber value="#{rptImprimirPlanillaBeans.nroPlanilla}" decimalPlaces="0"/>
+                             </h:panelGrid>
+                            <br/>
+                                <h:commandButton value="Imprimir" class="btn btn-primary" 
+                                                 actionListener="#{rptImprimirPlanillaBeans.rptPlanilla()}"/>
+                                <h:commandButton value="Cancelar" style="margin-left: 7px" class="btn btn-primary" actionListener="#{rptAniversarioBeans.rptAniversarios()}"/>
+
+                        </p:panel>
+
+
+                    </h:form>
+                </section>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

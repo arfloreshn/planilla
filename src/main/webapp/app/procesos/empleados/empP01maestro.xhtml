@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+ 
+  
+    <h:body>
+        <ui:composition template="../../../WEB-INF/plantillas/formLayout.xhtml">
+         
+            <ui:define name="content">
+
+                <div style="margin-top: 0px; height:800px">
+                    <h:form id="msjbox" style="margin-top: 0px">
+                        <p:messages style="margin-top: 0px" id="messages"  showDetail="false" closable="true" severity="info, fatal"/>
+                    </h:form>
+
+                    <h:form id="main" style="margin-top: 0px">
+                        <p:toolbar id="toolbar">
+                            <p:toolbarGroup align="left">
+                                <p:outputLabel for="lblid" value="Id. Empleado"/>
+                                <p:inputText value="#{empleadosBean.empleados.codEmpleado}" 
+                                             id="lblid" 
+                                             label="id"  
+                                             > 
+                                    <p:ajax listener="#{empleadosBean.buscarEmpleado()}" 
+                                            event="blur" 
+                                            onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"
+                                            update=":main:lblid
+                                            , :main:basic
+                                            , :Empleados:grinfo
+                                            , :Empleados:datadd
+                                            , :Empleados:panelfoto"
+                                            process="@this,lblid" 
+                                            partialSubmit="true">
+
+                                    </p:ajax>
+                                </p:inputText>
+
+                                <p:commandButton type="button" 
+                                                 icon="pi pi-search"
+                                                 onclick="PF('dlgEmpleado').show()" 
+                                                 label="Buscar empleado">
+
+                                </p:commandButton>
+
+                                <p:message for="lblid" />
+                            </p:toolbarGroup>
+
+                            <p:toolbarGroup align="right">
+
+                                <p:commandButton  id="cmdnuevo" 
+                                                  icon="pi pi-file" 
+                                                  action="#{empleadosBean.nuevoregistro()}"
+                                                  title="Nuevo" 
+                                                  value="Nuevo"
+                                                  update=":main
+                                                  , :Empleados:grinfo
+                                                  , :Empleados:datadd
+                                                  , :Empleados:panelfoto"
+                                                  process="@this,cmdnuevo"
+                                                  partialSubmit="true"
+
+                                                  >
+
+                                </p:commandButton>
+
+                                <p:splitButton id="basic" 
+                                               value="Acción" >
+                                    <p:menuitem id="cmdguardar"
+                                                value="Guardar" 
+                                                disabled="#{!empleadosBean.enable}"
+                                                action="#{empleadosBean.btnAccion()}" 
+                                                update=":main
+                                                , :Empleados:grinfo
+                                                , :Empleados:datadd
+                                                , :Empleados:panelfoto"
+                                                icon="pi pi-save"
+                                                process="@this,cmdguardar"
+                                                partialSubmit="true"
+                                                onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()">
+                                        <p:ajax oncomplete="PF('dgNroEmp').show()"></p:ajax>
+
+                                    </p:menuitem>
+                                    <p:separator />
+                                    <p:menuitem id="cmdbaja" value="Dar baja"
+                                                disabled="#{!empleadosBean.enable}"
+                                                actionListener="#{empleadosBean.btnbajaEmpleado(actionevent)}" 
+                                                update=":Empleados:grinfo
+                                                , :Empleados:datadd
+                                                , :Empleados:panelfoto"
+                                                icon="fa fa-fw fa-remove"
+                                                process="@this,cmdbaja"
+                                                partialSubmit="true" />
+                                    <p:separator />
+                                    <p:menuitem value="Volver" url="http://www.primefaces.org" 
+                                                icon="pi pi-home" />
+                                </p:splitButton>
+
+
+                            </p:toolbarGroup>
+
+                        </p:toolbar>
+
+
+                        <p:sticky target="toolbar"  />
+
+                    </h:form>
+                     <br/>
+                    <!-- <p:growl id="growl" life="3000" autoUpdate="true" showDetail="true"/> -->
+                    <h:form id="Empleados">
+
+                        <p:dialog header="Id. Empleado" widgetVar="dgNroEmp"  modal="true"
+                                  showEffect="explode" hideEffect="bounce" position="center"  height="70">
+                            <h:panelGrid columns="1" style="align-content: center">
+                                <p:outputLabel value="No. #{empleadosBean.empleados.codEmpleado}"  />
+                                <p:separator/>
+                                <p:commandButton value="Aceptar" 
+                                                 oncomplete="PF('dgNroEmp').hide()" 
+                                                 icon="pi pi-check"/>
+
+                            </h:panelGrid>
+                        </p:dialog>
+
+
+                        <p:panel id="grinfo" 
+                                 header="Datos generales"
+                                 toggleable="true" toggleSpeed="500">
+
+                            <p:autoUpdate />
+
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12 ui-md-4">
+                                    <div class="ui-inputgroup">
+                                        <h:panelGrid id="seccion1" columns="1" cellpadding="5">
+
+                                            <p:outputLabel for="nrodoc"  value="Nro documento.:"/>
+                                            <p:inputText  id="nrodoc" 
+                                                          disabled="#{!empleadosBean.enable}"
+                                                          value="#{empleadosBean.empleados.nroIdentidad}" 
+                                                          required="true"
+                                                          requiredMessage="El numero de identificación">
+                                                <f:validateLength minimum="10" maximum="15"/>
+                                                <p:ajax update="@this,nrodoc" event="blur" process="@this,nrodoc" partialSubmit="true"/>
+                                            </p:inputText>
+                                            <p:message for="nrodoc" />
+
+                                            <p:outputLabel for="cbotipodoc" value="Tipo documento"/>
+                                            <p:selectOneMenu  id="cbotipodoc" 
+                                                              required="true"
+                                                              immediate="true"
+                                                              disabled="#{!empleadosBean.enable}"
+                                                              value="#{empleadosBean.empleados.ttipoDocumento.id}"
+                                                              requiredMessage="Escoja el tipo de documentación del empleado">
+                                                <f:selectItem itemLabel="Seleccion un tipo documento" itemValue="0"  />
+                                                <f:selectItems value="#{empleadosBean.listaTipoDocumento}" 
+                                                               var="p" itemLabel="#{p.Descripcion}" 
+                                                               itemValue="#{p}"/>
+                                                <f:validateLongRange minimum="1" maximum="99"/>
+                                                <p:ajax event="change" 
+                                                        update="cbotipodoc"
+                                                        process="@this,cbotipodoc"
+                                                        partialSubmit="true" >
+
+                                                </p:ajax>
+                                            </p:selectOneMenu>
+                                            <p:message for="cbotipodoc" />
+
+                                            <p:outputLabel for="lblape1" value="Primer apellido.:"/>
+                                            <p:inputText id="lblape1" value="#{empleadosBean.empleados.primerApellido}" 
+                                                         disabled="#{!empleadosBean.enable}"
+                                                         required="true" label="Primer Apellido"
+                                                         requiredMessage="El apellido es obligatorio, favor ingresarlo"
+                                                         onblur="javascript:this.value = this.value.toUpperCase();">
+                                                <f:validateLength minimum="3" maximum="60"/>
+                                                <p:ajax update="@this,lblape1" event="blur" process="@this" partialSubmit="true"/> 
+                                            </p:inputText>
+                                            <p:message for="lblape1"/>
+
+                                            <p:outputLabel for="lblape2" value="Segundo apellido.:"/>
+                                            <p:inputText id="lblape2" 
+                                                         value="#{empleadosBean.empleados.segundoApellido}" 
+                                                         disabled="#{!empleadosBean.enable}"
+                                                         label="Ingrese el segundo apellido"
+                                                         onblur="javascript:this.value = this.value.toUpperCase();">
+                                                <p:ajax update="@this,lblape2" event="blur" process="@this" partialSubmit="true"/> 
+
+                                            </p:inputText>
+                                            <p:message for="lblape2"/>
+
+                                            <p:outputLabel for="lblnom" value="Nombres.:"/>
+                                            <p:inputText id="lblnom" 
+                                                         value="#{empleadosBean.empleados.nombres}" 
+                                                         disabled="#{!empleadosBean.enable}"
+                                                         required="true"
+                                                         requiredMessage="EL nombre es obligatorio, favor ingresarlo"
+                                                         placeholder="Ingrese los nombres del empleado"
+                                                         label="Ingrese los nombres del empleado" 
+                                                         onblur="javascript:this.value = this.value.toUpperCase();">
+                                                <f:validateLength minimum="3" maximum="80"/>
+                                                <p:ajax update="@this,lblnom" event="blur" process="@this" partialSubmit="true"/> 
+
+                                            </p:inputText>
+                                            <p:message for="lblnom"/>
+
+                                        </h:panelGrid>
+
+                                    </div>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-4">
+                                    <div class="ui-inputgroup">
+                                        <h:panelGrid id="seccion2" columns="1">
+                                            <p:outputLabel for="lblfecnac" value="Fecha de nacimiento"/>
+                                            <p:datePicker id="lblfecnac"
+                                                          disabled="#{!empleadosBean.enable}"
+                                                          value="#{empleadosBean.empleados.fechaNac}" 
+                                                          showButtonBar="true"
+                                                          required="true"
+                                                          requiredMessage="Fecha de nacimiento obligatoria, favor ingresela"
+                                                          pattern="dd/MM/yyyy"
+                                                          >
+                                                <p:ajax update="@this,lblfecnac" event="blur" process="@this" partialSubmit="true"/> 
+                                            </p:datePicker>
+                                            <p:message for="lblfecnac" />
+
+                                            <p:outputLabel for="lblfecalt" value="Fecha de Alta"/>
+                                            <p:datePicker id="lblfecalt" 
+                                                          value="#{empleadosBean.empleados.fecAlta}" 
+                                                          disabled="#{!empleadosBean.enable}"
+                                                          required="true"
+                                                          requiredMessage="Fecha de alta obligatoria, favor ingresela"
+                                                          showButtonBar="button" 
+                                                          pattern="dd/MM/yyyy"
+                                                          label="Fecha de ingreso del empleado">
+                                                <p:ajax update="@this,lblfecalt" event="blur" process="@this" partialSubmit="true"/> 
+                                            </p:datePicker>
+                                            <p:message for="lblfecalt" />
+                                            <h:outputText value="Fecha de Baja"/>
+                                            <p:datePicker value="#{empleadosBean.empleados.fecBaja}" 
+                                                          disabled="#{!empleadosBean.enable}"
+                                                          showButtonBar="button" 
+                                                          pattern="dd/MM/yyyy"
+                                                          label="Fecha de baja del empleado">
+                                                <p:ajax update="@this,lblfecalt" event="blur" process="@this,lblfecalt" partialSubmit="true"/> 
+
+                                            </p:datePicker>
+
+                                            <p:outputLabel id="lblcboestadocivil" for="cboestadocivil" value="Estado civil"/>
+                                            <p:selectOneMenu  id="cboestadocivil"
+                                                              required="true"
+                                                              disabled="#{!empleadosBean.enable}"
+                                                              value="#{empleadosBean.empleados.testadoCivil.id}"
+                                                              valueChangeListener="#{empleadosBean.oncboEstadoCivil}"> 
+                                                <f:selectItem itemLabel="Seleccion el estado civil" 
+                                                              itemValue="0" />
+                                                <f:selectItems value="#{empleadosBean.listaEstadocivil}" 
+                                                               var="c" itemLabel="#{c.Descripcion}" 
+                                                               itemValue="#{c}"
+                                                               />
+                                                <p:ajax event="change"  update=":msjbox:messages"/>
+                                            </p:selectOneMenu>
+                                            <p:message for="cboestadocivil" />
+
+
+                                            <p:outputLabel for="optsexo" value="Sexo"/>
+
+                                            <p:selectOneRadio id="optsexo" 
+                                                              disabled="#{!empleadosBean.enable}"
+                                                              required="true" 
+                                                              value="#{empleadosBean.sexo}"   
+                                                              unselectable="true" 
+                                                              columns="2" >
+                                                <f:selectItem itemLabel="Femenino" itemValue="F"  noSelectionOption="true" />
+                                                <f:selectItem itemLabel="Masculino" itemValue="M" noSelectionOption="true"/>
+                                                <p:ajax update="optsexo" event="blur"  process="@this,optsexo" partialSubmit="true"/> 
+
+                                            </p:selectOneRadio>
+                                            <p:message for="optsexo"/>
+
+
+                                            <p:outputLabel for="cbocategoria" value="Tipo contrato"/>
+                                            <p:selectOneMenu  id="cbocategoria" 
+                                                              required="true"
+                                                              requiredMessage="El tipo de contrato es obligatorio"
+                                                              disabled="#{!empleadosBean.enable}"
+                                                              value="#{empleadosBean.empleados.ttipoEmpleado.id}"
+                                                              valueChangeListener="#{empleadosBean.oncboTipoDocumentoEmpleado}">
+                                                <f:selectItem itemLabel="Seleccion el tipo de empleado" 
+                                                              itemValue="0" />
+                                                <f:selectItems value="#{empleadosBean.listaTipoEmpleado}" 
+                                                               var="c" itemLabel="#{c.Descripcion}" 
+                                                               itemValue="#{c}"/>
+                                                 <p:ajax event="change"  update=":msjbox:messages"/>
+                                            </p:selectOneMenu>
+                                            <p:message for="cbocategoria"/>
+
+                                            <p:outputLabel for="lblsueldo" value="Salario devengado"/>
+                                            <p:inputNumber  required="true" id="lblsueldo" 
+                                                            disabled="#{!empleadosBean.enable}"
+                                                            value="#{empleadosBean.empleados.sueldoBruto}" 
+                                                            decimalPlaces="2"
+                                                            decimalSeparator="." 
+                                                            thousandSeparator=",">
+                                                <p:ajax update="@this,lblsueldo" event="blur" process="@this" partialSubmit="true"/> 
+                                            </p:inputNumber>
+                                            <p:message for="lblsueldo"/>
+
+                                        </h:panelGrid>
+
+                                    </div>
+                                </div>
+
+                                <div class="ui-g-12 ui-md-4">
+                                    <div class="ui-inputgroup">
+                                        <p:fieldset  id="fotografia" 
+                                                     legend="Fotografia" style="width: 100%; height: 100%; ">
+                                            <h:panelGrid id="seccion3" columns="1">
+                                                <p:graphicImage  id="picture"
+                                                                 style="width: 80%; height: 80%;"
+                                                                 library="images"
+                                                                 name="#{empleadosBean.foto}"
+                                                                 >
+
+                                                </p:graphicImage>
+                                            </h:panelGrid> 
+                                        </p:fieldset>                                                
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </p:panel>
+                        <br/>
+                        <p:panel id="datadd"  header="Datos complementarios" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500"> 
+                            <p:tabView id="tabview"  cache="true" 
+                                       >
+                                <p:tab id="tb1" title="Oficina">
+                                    <h:panelGrid id="gr1" columns="1">
+                                        <p:outputLabel for="cbocargo" value="Cargo"/>
+                                        <p:selectOneMenu id="cbocargo" 
+                                                         filter="true" filterMatchMode="startsWith"
+                                                         value="#{empleadosBean.empleados.tcargo.id}"
+                                                         required="true"
+                                                         disabled="#{!empleadosBean.enable}"
+                                                         valueChangeListener="#{empleadosBean.oncboCargo}">
+                                            <f:selectItem itemLabel="-- Seleccione el cargo --" 
+                                                          itemValue="0"/>
+                                            <f:selectItems value="#{empleadosBean.listaCargos}" 
+                                                           var="ca" 
+                                                           itemLabel="#{ca.NomCargo}"
+                                                           itemValue="#{ca.id}"
+                                                           />
+                                             <p:ajax event="change"  update=":msjbox:messages"/>
+                                        </p:selectOneMenu>
+                                        <p:message for="cbocargo"/>
+
+                                        <p:outputLabel for="cboprofesion"
+                                                       value="Profesión"/>
+                                        <p:selectOneMenu id="cboprofesion" 
+                                                         filter="true" filterMatchMode="startsWith"
+                                                         required="true"
+                                                         disabled="#{!empleadosBean.enable}"
+                                                         value="#{empleadosBean.empleados.tprofesion.id}"
+                                                         valueChangeListener="#{empleadosBean.oncboProfesion}">
+                                            <f:selectItem itemLabel="-- Seleccione la profesion --" itemValue="0"/>
+                                            <f:selectItems value="#{empleadosBean.listaProfesion}" 
+                                                           var="p" 
+                                                           itemLabel="#{p.NomProfesion}"
+                                                           itemValue="#{p}"
+                                                           />
+                                             <p:ajax event="change"  update=":msjbox:messages"/>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel for="cbolocacion" value="Labora en departamento"/>
+
+                                        <p:selectOneMenu id="cbolocacion" 
+                                                         required="true"
+                                                         disabled="#{!empleadosBean.enable}"
+                                                         value="#{empleadosBean.empleados.tdeptoEmp.id}"
+                                                         valueChangeListener="#{empleadosBean.oncboDeptoEmp}">
+                                            <f:selectItem itemLabel="-- Asigne el departamento --" itemValue="0"/>
+                                            <f:selectItems value="#{empleadosBean.listaUbicacion}" 
+                                                           var="ubi" 
+                                                           itemLabel="#{ubi.nomDepto}"
+                                                           itemValue="#{ubi}"
+                                                           />
+                                             <p:ajax event="change"  update=":msjbox:messages"/>
+                                        </p:selectOneMenu>
+                                        <p:message for="cbolocacion"/>                                    
+                                    </h:panelGrid>
+
+                                </p:tab>
+                                <p:tab id="tb2" 
+                                       title="Geografía">
+                                    <h:panelGrid  id="gr2" columns="1">
+                                        <p:outputLabel for="cbopais" value="Pais"/>
+                                        <p:selectOneMenu id="cbopais" 
+                                                         filter="true" filterMatchMode="startsWith"
+                                                         required="true" 
+                                                         disabled="#{!empleadosBean.enable}"
+                                                         value="#{empleadosBean.empleados.tpais.id}"
+                                                         valueChangeListener="#{empleadosBean.oncboPais}">
+                                            <f:selectItem itemLabel="-- Seleccione el Pais --" itemValue=""/>
+                                            <f:selectItems value="#{empleadosBean.listarPais}" var="p" 
+                                                           itemLabel="#{p.NomPais}"
+                                                           itemValue="#{p}"
+                                                           />
+                                            
+                                            <p:ajax event="change" update="cbodepto" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
+                                        </p:selectOneMenu>
+                                        <p:message for="cbopais"/>
+
+                                        <p:outputLabel for="cbodepto" value="Departamento"/>
+                                        <p:selectOneMenu id="cbodepto" 
+                                                         filter="true" 
+                                                         filterMatchMode="startsWith"
+                                                         required="true" 
+                                                         disabled="#{!empleadosBean.enable}"
+                                                         value="#{empleadosBean.id_deptopais}"
+                                                         valueChangeListener="#{empleadosBean.oncboDeptoPais}">
+                                            <f:selectItem itemLabel="-- Seleccione el departamento --"/>
+                                            <f:selectItems value="#{empleadosBean.listaDeptos}" var="d" 
+                                                           itemLabel="#{d.NomDepto}"
+                                                           itemValue="#{d.id}" rendered="true"
+                                                           />
+                                        
+                                          <p:ajax update="cbomuni" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
+                                       
+                                        </p:selectOneMenu>
+                                        <p:message for="cbodepto"/>
+
+                                        <p:outputLabel for="cbomuni" value="Municipio"/>
+                                        <p:selectOneMenu id="cbomuni" 
+                                                         filter="true" filterMatchMode="startsWith"
+                                                         disabled="#{!empleadosBean.enable}"
+                                                         required="true"
+                                                         value="#{empleadosBean.id_municipio}"
+                                                         valueChangeListener="#{empleadosBean.oncboMunicipio}">
+                                            <f:selectItem itemLabel="-- Seleccione un municipio --"/>
+                                            <f:selectItems value="#{empleadosBean.listaMunicipios}" var="m" 
+                                                           itemLabel="#{m.id} - #{m.NomMuni}"
+                                                           itemValue="#{m}" rendered="true"
+                                                           />
+
+                                            <p:ajax event="change"  update=":msjbox:messages"/>
+                                        </p:selectOneMenu>
+                                        <p:message for="cbomuni"/>
+
+                                    </h:panelGrid>
+
+                                </p:tab>
+
+                                <p:tab  id="tb3" title="Telefonos">
+                                    <h:panelGrid id="gr3" columns="1">
+                                        <p:outputLabel for="lbltel1" value="No. de Movil/celular"/>
+                                        <p:inputMask id="lbltel1" 
+                                                     required="true" 
+                                                     disabled="#{!empleadosBean.enable}"
+                                                     value="#{empleadosBean.empleados.tel1}" 
+                                                     mask="9999-9999">
+                                            <f:validateLength minimum="8" maximum="9"/>
+                                            <p:ajax update="@this,lbltel1" event="blur" process="@this"/>
+                                        </p:inputMask>
+                                        <p:message for="lbltel1"/>
+                                        <h:outputText value="No. de Fijo/Residencia"/>
+                                        <p:inputMask  id="lbltel2"
+                                                      value="#{empleadosBean.empleados.tel2}" 
+                                                      mask="9999-9999"/>
+                                    </h:panelGrid>
+                                </p:tab>
+
+                                <p:tab id="tb4" title="Correo Electronico">
+                                    <h:panelGrid id="gr4" columns="1">
+                                        <p:outputLabel for="lblmail1" value="Correo de personal"/>
+                                        <p:inputText id="lblmail1" 
+                                                     value="#{empleadosBean.empleados.correo1}"
+                                                     required="true" 
+                                                     disabled="#{!empleadosBean.enable}"
+                                                     requiredMessage="Favor ingrese el correo personal"
+                                                     validatorMessage="La dirección de correo es invalida">
+                                            <f:validateRegex
+                                                pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                            <p:ajax update="@this,lblmail1" event="blur" process="@this"/>
+                                        </p:inputText>
+                                        <p:message for="lblmail1"/>
+
+                                        <h:outputText value="Correo oficina/alterno"/>
+                                        <p:inputText id="lblmail2"
+                                                     disabled="#{!empleadosBean.enable}"
+                                                     value="#{empleadosBean.empleados.correo2}"/>
+
+                                    </h:panelGrid>
+                                </p:tab>
+
+                                <p:tab id="tb5" title="Lugar de nacimiento" >
+                                    <p:outputLabel for="lbllugar" value="Lugar de nacimiento"/>
+                                    <p:inputText id="lbllugar"  style="width: 90%"  
+                                                 value="#{empleadosBean.empleados.lugarNacimiento}" 
+                                                 label="Lugar de nacimiento"
+                                                 required="true"
+                                                 requiredMessage="El lugar de nacimiento es obligatorio"
+                                                 disabled="#{!empleadosBean.enable}"/>
+                                    <p:message for="lbllugar"/>
+
+                                </p:tab>
+                            </p:tabView>
+                        </p:panel>
+ <br/>
+                        <p:panel id="panelfoto" header="Cambiar fotografía" 
+                                 toggleable="true" toggleSpeed="500"
+                                 closable="true" closeSpeed="500"
+                                 style="height: 100%;">
+                            <p:fileUpload id="upload" 
+                                          style="width: 90%; height: 90%;"
+                                          sizeLimit="100000" fileLimit="1"
+                                          label="Buscar" 
+                                          uploadLabel="Subir"
+                                          cancelLabel="cancelar"
+                                          mode="advanced" 
+                                          dragDropSupport="true"
+                                          skinSimple="false"
+                                          fileLimitMessage="Seleccione un(1) archivo"
+                                          invalidFileMessage="Archivo no valido"
+                                          invalidSizeMessage="El tamaño es muy grande"
+                                          fileUploadListener="#{empleadosBean.subirfoto}"
+                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                          update=":Empleados:fotografia"
+                                          >
+                            </p:fileUpload>
+
+
+                        </p:panel>
+
+
+                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                            <p:graphicImage name="/images/gifs/5.gif" />
+                        </p:dialog>
+
+                    </h:form>
+
+                </div>
+
+                <h:form id="lstempleados" style="width: 70%; font-size: 14px;">
+                    <p:dialog id="dlgEmpleado" width="700px" 
+                              header="Listado de empleado" widgetVar="dlgEmpleado" modal="true" 
+                              showEffect="fade" hideEffect="fade" resizable="true">
+                        <p:dataTable id="dtempleados"
+                                     var="emp" 
+                                     value="#{empleadosBean.lstEmpleados}"
+                                     emptyMessage="No hay datos a mostrar"  
+                                     paginator="true" rows = "10" 
+                                     style="width: 100%; font-size: 14px;"
+                                     rowsPerPageTemplate="5,10,15,20,25,30,40,50"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+                            <p:column headerText="Id. empleado" style="width:7%; font-size: 10px ">
+                                <h:outputText value="#{emp.codEmpleado}"> </h:outputText> 
+                            </p:column>
+
+                            <p:column headerText="Apellidos/Nombres" style="width:40px; font-size: 10px ">
+                                <h:outputText value="#{emp.primerApellido} #{emp.segundoApellido} / #{emp.nombres}"> </h:outputText> 
+                            </p:column>
+
+                            <p:column headerText="Fec. Ingreso" style="width: 8px; font-size: 10px ">
+                                <h:outputText value="#{emp.fecAlta}"> </h:outputText> 
+                            </p:column>
+
+                            <p:column headerText="Cargo. Oficina" style="width: 10px; font-size: 10px ">
+                                <h:outputText value="#{emp.tcargo.nomCargo}"> </h:outputText> 
+                            </p:column>
+
+
+                            <p:column headerText="Seleccione" 
+                                      style="width:10%;text-align: left;font-size: 12px; align-content: center; align-items: center">
+
+                                <!-- *-*-*-*-*-* ACTUALIZAR EDITAR *-*-*-*-*-*-*-* -->
+
+                                <p:commandButton id="btnSelect" 
+                                                 icon="pi pi-check-circle"
+                                                 title="Seleccionar"
+                                                 actionListener="#{empleadosBean.btnHabilitar()}"
+                                                 oncomplete="PF('dlgEmpleado').hide()"
+                                                 update=":main:lblid
+                                                 , :main:basic
+                                                 , :Empleados
+                                                 , :Empleados:datadd
+                                                 , :Empleados:panelfoto">
+
+                                    <!-- Cuando se envia un parametro a un formulario dentro de la misma pagina
+                                         se hace por medio de alias en este caso "mrol", en caso esta declarado
+                                         previamente, dataTable id="dtrolers" var="mrol" del formulario  id="frmdtrol"
+                                         ese alias contiene la informacion de rol que hemos seleccionado
+                                    -->
+                                    <f:setPropertyActionListener value="#{emp}" 
+                                                                 target="#{empleadosBean.empleados}"/>
+
+                                </p:commandButton>
+
+                            </p:column>
+
+                        </p:dataTable>
+                        <p:commandButton value="Cancelar" 
+                                         oncomplete="PF('dlgEmpleado').hide()"
+                                         ></p:commandButton>
+                    </p:dialog>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+       
+</html>

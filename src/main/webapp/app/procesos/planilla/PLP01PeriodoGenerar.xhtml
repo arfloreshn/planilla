@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+ 
+    <head>
+        <title>Crear planilla del periodo</title>
+        <meta charset="utf-8"/>
+        <meta name="description" content="Reporte de aniversarios"/>
+        <meta name="author" content="Allan Ramiro Flores"/>
+    </head>
+    <ui:composition template="../../../WEB-INF/plantillas/formLayout.xhtml">
+        <ui:define name="content">
+            <section  style="margin-left: 2px; margin-top: 0px; height: 420px">
+
+                <h:form id="reporte" style="width: 100%; height: 50%">
+                    <p:panel id="encabezado" header="Crear nueva planilla del periodo" > 
+                        <div class="ui-g ui-fluid">
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <p-panel header="Periodo">
+                                        <h:panelGrid columns="2">
+                                            <h:outputLabel value="Mes fiscal: "/>
+                                            <h:outputLabel value="#{planillacrearBean.mPeriodo}"/>
+                                            <h:outputLabel value="Año fiscal: "/>
+                                            <h:outputLabel value="#{planillacrearBean.manio}"/>
+                                            <h:outputLabel value="Responsable: "/>
+                                            <h:outputLabel value="arflores"/>
+                                            <h:outputLabel value="Fec. de gestión: "/>
+                                            <p:datePicker  size="8" 
+                                                           value="#{planillacrearBean.var_fecha_sistema}" 
+                                                           showButtonBar="true" pattern="dd/MM/yyyy"/>
+                                        </h:panelGrid>
+
+                                    </p-panel>
+                                </div>
+                            </div>
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <p-panel header="Inf. Financiera">
+                                        <h:panelGrid   columns="2">
+                                            <h:outputLabel value="Tipo de Planilla: "/>
+                                            <p:selectOneMenu  id="cbotipoplanilla" 
+                                                              required="true"
+                                                              style="width: 180px"
+                                                              value="#{planillacrearBean.var_Tipoplanilla}"
+                                                              requiredMessage="Escoja el tipo de planilla de pago">
+                                                <f:selectItem itemLabel="Seleccione un tipo de planilla" itemValue="0"  />
+                                                <f:selectItems value="#{planillacrearBean.listarTipoPlanilla}" 
+                                                               var="p" itemLabel="#{p.Desc}" 
+                                                               itemValue="#{p}"/>
+                                            </p:selectOneMenu>
+
+                                            <h:outputLabel value="Cuenta bancaria: "/>
+                                            <p:selectOneMenu  id="cboctabco" 
+                                                              style="width: 180px"
+                                                              dynamic="true"
+                                                              value="#{planillacrearBean.var_cod_cta_bco}"
+                                                              required="true"
+                                                              requiredMessage="La Cta. Bancaria es obligatoria">
+                                                <f:selectItem itemLabel="Favor seleccione" itemValue="" noSelectionOption="true"/>
+                                                <f:selectItems value="#{planillacrearBean.listarCuentaBancaria}" 
+                                                               var="p" 
+                                                               itemLabel="#{p.NroCtaBco}" 
+                                                               itemValue="#{p}"/>
+                                                <f:ajax execute="cboctabco"/>
+
+                                            </p:selectOneMenu>
+
+                                            <h:outputLabel value="Moneda: "/>
+                                            <p:selectOneMenu  id="cbotipomoneda" 
+                                                              required="true"
+                                                              style="width: 180px"
+                                                              value="#{planillacrearBean.var_cod_moneda}"
+                                                              requiredMessage="El tipo de moneda es obligatorio">
+                                                <f:selectItem itemLabel="Favor seleccione" itemValue="0"  />
+                                                <f:selectItems value="#{planillacrearBean.listarTipoMoneda}" 
+                                                               var="p" itemLabel="#{p.Descripcion}" 
+                                                               itemValue="#{p}"/>
+                                                 <f:ajax execute="cbotipomoneda"/>
+                                            </p:selectOneMenu>
+
+                                            <h:outputLabel value="Factor cambiario: "/>
+                                            <p:inputNumber value="#{planillacrearBean.var_factor_cambio}"
+                                                           placeholder="Ingrese la divisa"
+                                                           size="18" 
+                                                           thousandSeparator="," decimalSeparator="." minValue="0"
+                                                           decimalPlaces="4"/>
+                                        </h:panelGrid>
+                                    </p-panel>
+
+                                </div>
+                            </div>
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <p-panel header="Inf. Usuario">
+                                        <h:panelGrid id="resumen1" columns="2">
+                                            <h:outputLabel value="Importe Bruto de Pago: "/>
+                                            <h:outputLabel value="#{planillacrearBean.var_tot_bruto}">
+                                                <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/> 
+                                            </h:outputLabel>
+                                            <h:outputLabel value="Importe Bruto Debitos: "/>
+                                            <h:outputLabel value="#{planillacrearBean.var_tot_debitos}">
+                                                <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/> 
+                                            </h:outputLabel>
+                                            <h:outputLabel value="Importe Bruto Credito: "/>
+                                            <h:outputLabel value="#{planillacrearBean.var_tot_credito}">
+                                                  <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/> 
+                                           </h:outputLabel>
+                                            <h:outputLabel value="Total neto a reservar: "/>
+                                            <h:outputLabel value="#{planillacrearBean.var_tot_neto}">
+                                                  <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/> 
+                                            </h:outputLabel>
+                                            <h:outputLabel value="Conteo de Pagos: "/>
+                                            <h:outputLabel value="#{planillacrearBean.var_nro_pagos}">
+                                                  <f:convertNumber  pattern="###,###,###.##"/> 
+                                            </h:outputLabel>
+                                        </h:panelGrid>
+                                    </p-panel>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </p:panel>
+                </h:form>
+
+                <h:form id="detalle">
+                    <p:dataTable id="dtempleados" 
+                                 var="pl" 
+                                 value="#{planillacrearBean.lstEmpleados}" 
+                                 paginator="true" 
+                                 selection="#{planillacrearBean.selectedFilas}"
+                                 rowKey="#{pl.id_emp}"
+                                 rows = "8" 
+                                 style="width: 100%; font-size: 14px;"
+                                 rowsPerPageTemplate="5,10,15,20,25,30,40,50"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                        <f:facet name="header">
+                            Seleccione
+                        </f:facet>
+
+                        <p:column headerText="#"
+                                  selectionMode="multiple" 
+                                  style="width:16px;text-align:center">
+                        </p:column> 
+
+                        <p:ajax event="rowSelectCheckbox" listener="#{planillacrearBean.onRowSelect}" update=":reporte:encabezado"/>
+                        <p:ajax event="rowUnselectCheckbox" listener="#{planillacrearBean.onRowUnselect}" update=":reporte:encabezado"/>
+                        <p:ajax event="toggleSelect" listener="#{planillacrearBean.toggleSelected}" update=":reporte:resumen1"/>
+
+                        <p:column headerText="Cod. Empleado" style="width: 10%;  font-family:  serif; font-size: 12px">
+                            <h:outputText value="#{pl.codEmp}" class="pull-right"/>
+                        </p:column>
+                        <p:column headerText="Apellidos /Nombres empleado" style="width: 45%; font-family:  serif; font-size:  12px">
+                            <h:outputText value="#{pl.nombre}" />
+                        </p:column>
+                        <p:column headerText="Sueldo Bruto" style="width: 10%; font-family:  serif; font-size:  12px">
+                            <h:outputText value="#{pl.impSueldoBruto}" class="pull-right" >
+                             <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Debitos" style="width: 10%; font-family:  serif; font-size:  12px">
+                            <h:outputText value="#{pl.impDebitos}" class="pull-right">
+                             <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Creditos" style="width: 10%; font-family:  serif; font-size:12px">
+                            <h:outputText value="#{pl.impCreditos}"  class="pull-right">
+                             <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Neto a pagar" style="width: 10%; font-family:  serif; font-size:12px">
+                            <h:outputText value="#{pl.impPagoNeto}" class="pull-right">
+                             <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/>
+                            </h:outputText>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="cmdguardar"
+                                             action="#{planillacrearBean.cmdguardar}"
+                                             value="Guardar"/>
+                        </f:facet>
+
+
+
+                    </p:dataTable>
+
+                </h:form>
+            </section>
+            <script type="text/javascript">
+            </script>
+
+        </ui:define>
+
+    </ui:composition>
+
+
+</html>

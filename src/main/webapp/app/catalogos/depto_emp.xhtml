@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+    <h:body>
+        <ui:composition template="../../WEB-INF/plantillas/formLayout.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="growl" showDetail="true"/>
+
+                <div class="ancho_datatable">
+
+                    <h:form id="frmRol">
+
+                        <p:toolbar>
+
+                            <p:toolbarGroup align="right">
+                                <!-- *-*-*-*-*-* CREAR REGISTRO *-*-*-*-*-*-*-* -->
+                                <p:commandButton update=":frmcrear" oncomplete="PF('dlgCrear').show()" 
+                                                 icon="icon-new"  title="Crear" value="Crear" 
+                                                 actionListener="#{deptoempBean.instanciar}">
+
+                                </p:commandButton>
+                            </p:toolbarGroup>
+
+                        </p:toolbar>
+
+
+                        <p:dataTable id="dtRol" var="dep" value="#{deptoempBean.lstdeptos()}" 
+                                     paginator="true" rows = "10" 
+                                     style="width: 100%; font-size: 14px;"
+                                     rowsPerPageTemplate="5,10,15,20,25,30,40,50"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                            <f:facet name="header">
+                                Catalago de departamentos en la empresa
+                            </f:facet>
+
+                            <p:column  style="width:2%">
+                                <f:facet name="header">
+                                    id
+                                </f:facet>
+
+                                <h:outputText value="#{dep.id}"> </h:outputText> 
+                            </p:column>
+
+                            <p:column filterBy="#{dep.nomDepto}"
+                                      sortBy="#{dep.nomDepto}" filterMatchMode="contains" style="width:70%">
+                                <f:facet name="header">
+                                    Descripcion del departamento
+                                </f:facet>
+                                <h:outputText value="#{dep.nomDepto}"> </h:outputText> 
+                            </p:column>
+                            <p:column headerText="Escoja su opcion" style="width:15px;text-align: left">
+
+                                <!-- *-*-*-*-*-* ACTUALIZAR EDITAR *-*-*-*-*-*-*-* -->
+
+                                <p:commandButton id="btnUpdate" 
+                                                 update=":frmUpdate" oncomplete="PF('dlgModifica').show()" 
+                                                 icon="icon-edit" title="Editar">
+
+                                    <!-- Cuando se envia un parametro a un formulario dentro de la misma pagina
+                                         se hace por medio de alias en este caso "mrol", en caso esta declarado
+                                         previamente, dataTable id="dtrolers" var="mrol" del formulario  id="frmdtrol"
+                                         ese alias contiene la informacion de rol que hemos seleccionado
+                                    -->
+                                    <f:setPropertyActionListener value="#{dep}" 
+                                                                 target="#{deptoempBean.depto}"/>
+                                </p:commandButton>
+
+                                <!-- *-*-*-*-*-* ELIMINAR REGISTRO  *-*-*-*-*-*-*-*-*-* -->
+                                <p:commandButton id="btnEliminar" update=":frmborrar" 
+                                                 oncomplete="PF('dlgBorra').show()" 
+                                                 icon="icon-delete" title="Quitar">
+                                    <!-- Cuando se envia un parametro a un formulario dentro de la misma pagina
+                                         se hace por medio de alias en este caso mrol, en caso esta declarado
+                                         previamente, dataTable id="dtrolers" var="mrol" del formulario  id="frmdtrol"
+                                         ese alias contiene la informacion de rol que hemos seleccionado
+                                    -->
+
+                                    <!-- La opcion target="{rolBean.rol}" envia los datos al formulario de borrar -->
+
+                                    <f:setPropertyActionListener value="#{dep}" 
+                                                                 target="#{deptoempBean.depto}"/>
+                                </p:commandButton>
+
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:form>
+
+                </div>
+                <!-- *-*-*-*-*-* FORMULARIO PARA CREAR REGISTRO  *-*-*-*-*-*-*-*-*-* -->
+
+
+                <h:form id="frmcrear">
+                    <p:dialog id="dlgUno" header="Crear rol" widgetVar="dlgCrear" modal="true" 
+                              showEffect="fade" hideEffect="fade" resizable="false">
+
+                        <p:panelGrid id="gridCrear"  columns="2" style="margin:0 auto;">
+
+                            <h:outputText value="Departamento:" />
+                            <p:inputText value="#{deptoempBean.depto.nomDepto}" />
+
+                            <f:facet name="footer">
+                                <p:separator/>
+                                <p:commandButton id="btnCrearAceptar" value="Guardar" 
+                                                 update=":frmRol:dtRol , :growl"
+                                                 actionListener="#{deptoempBean.btncrearCargo(actionevent)}"
+                                                 oncomplete="PF('dlgCrear').hide()" icon="icon-save" title="Guardar" >
+                                </p:commandButton>  
+                                <p:commandButton id="btnCrearCancelar" value="Cancelar" update=":frmcrear"
+                                                 oncomplete="PF('dlgCrear').hide()" icon="icon-cancel" title="Cancelar">
+                                </p:commandButton>
+
+                            </f:facet>
+                        </p:panelGrid>
+                    </p:dialog>
+
+
+                </h:form>
+
+                <!-- *-*-*-*-*-* FORMULARIO PARA MODIFICAR UN REGISTRO *-*-*-*-*-*-*-*-*-* -->
+
+                <h:form id="frmUpdate">
+
+                    <p:dialog id="dlgDos" header="Actualizar Usuario" widgetVar="dlgModifica" modal="true" 
+                              showEffect="fade" hideEffect="fade" resizable="false">
+
+                        <p:panelGrid id="gridUpdate"  columns="2" style="margin:0 auto;">
+
+                            <h:outputText value="Id:" />
+                            <p:inputText value="#{deptoempBean.depto.id}" readonly="true" />
+
+                            <h:outputText value="Descripcion:" />
+                            <p:inputText value="#{deptoempBean.depto.nomDepto}" />
+
+                            <h:inputHidden value="#{deptoempBean.depto.id}"/>
+
+
+                            <f:facet name="footer">
+                                <p:separator/>
+
+                                <p:commandButton id="btnUpdateAceptar" value="Guardar"  
+                                                 update=":frmRol:dtRol , :growl"  
+                                                 actionListener="#{deptoempBean.btneditarCargo(actionevent)}"
+                                                 oncomplete="PF('dlgModifica').hide()"  icon="icon-check" title="Guardar"/>
+                                <p:commandButton id="btnUpdateCancelar" value="Cancelar" update=":frmcrear"
+                                                 oncomplete="PF('dlgModifica').hide()" icon="icon-cancel">
+                                </p:commandButton>
+
+                            </f:facet>
+
+                        </p:panelGrid>
+                    </p:dialog>
+
+                </h:form>
+
+                <!-- *-*-*-*-*-* FORMULARIO PARA ELIMINAR REGISTRO  *-*-*-*-*-*-*-*-*-* -->
+
+
+                <h:form id="frmborrar">
+
+                    <p:dialog id="dlgtres" header="Eliminar Usuario" widgetVar="dlgBorra" modal="true" 
+                              showEffect="fade" hideEffect="fade" resizable="false">
+
+                        <h:outputText value="Esta seguro que desee eliminar?"/> 
+                        <p:separator/>
+                        <p:panelGrid id="gridDelete"  columns="2" style="margin:0 auto;">
+
+                            <h:outputText value="Id:"/>
+                            <p:inputText value="#{deptoempBean.depto.id}" readonly="true" />
+
+                            <h:outputText value="Rol:" />
+                            <h:outputText value="#{deptoempBean.depto.nomDepto}" />
+                            <h:inputHidden value="#{deptoempBean.depto.id}" />
+
+
+                        </p:panelGrid>
+
+                        <p:separator/>
+
+                        <p:commandButton id="btnborrareliminar" value="Aceptar" 
+                                         update=":frmRol:dtRol , :growl" 
+                                         actionListener="#{deptoempBean.btnborrarCargo(actionevent)}"
+                                         oncomplete="PF('dlgBorra').hide()" 
+                                         icon="icon-check" />
+
+                        <p:commandButton id="btnborrarcancela" 
+                                         value="Cancelar" 
+                                         onclick="PF('dlgBorra').hide()" 
+                                         icon="icon-cancel" />
+                    </p:dialog>
+
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-20-2019 02:41:32 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.PlanResWkf" table="plan_res_wkf" catalog="planilla" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="empMae" class="modelo.EmpMae" fetch="select">
+            <column name="id_empleado" not-null="true" />
+        </many-to-one>
+        <many-to-one name="planMaeWkf" class="modelo.PlanMaeWkf" fetch="select">
+            <column name="id_planilla" not-null="true" />
+        </many-to-one>
+        <property name="periodo" type="int">
+            <column name="periodo" not-null="true" />
+        </property>
+        <property name="anio" type="int">
+            <column name="anio" not-null="true" />
+        </property>
+        <property name="nroPlanilla" type="int">
+            <column name="nro_planilla" not-null="true" />
+        </property>
+        <property name="nroCtaBco" type="string">
+            <column name="nro_cta_bco" length="20" not-null="true" />
+        </property>
+        <property name="impSueldoBruto" type="big_decimal">
+            <column name="impSueldoBruto" precision="18" not-null="true" />
+        </property>
+        <property name="impDebitos" type="big_decimal">
+            <column name="impDebitos" precision="18" not-null="true" />
+        </property>
+        <property name="impCreditos" type="big_decimal">
+            <column name="impCreditos" precision="18" not-null="true" />
+        </property>
+        <property name="impPagoNeto" type="big_decimal">
+            <column name="impPagoNeto" precision="18" not-null="true" />
+        </property>
+        <property name="snAutorizado" type="string">
+            <column name="sn_autorizado" length="2" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

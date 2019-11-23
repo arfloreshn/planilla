@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-11-2019 09:41:57 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.EmpMae" table="emp_mae" catalog="planilla" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="empCtaBco" class="modelo.EmpCtaBco" fetch="select">
+            <column name="id_cta_bco" />
+        </many-to-one>
+        <many-to-one name="tcargo" class="modelo.Tcargo" lazy="false" fetch="select">
+            <column name="id_cargo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tdeptoEmp" class="modelo.TdeptoEmp" lazy="false" fetch="select">
+            <column name="id_depto_emp" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tdeptoPais" class="modelo.TdeptoPais" lazy="false" fetch="select">
+            <column name="id_depto_pais" not-null="true" />
+        </many-to-one>
+        <many-to-one name="testadoCivil" class="modelo.TestadoCivil" lazy="false" fetch="select">
+            <column name="id_estado_civil" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tmunicipios" class="modelo.Tmunicipios" lazy="false" fetch="select">
+            <column name="id_municipio" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tpais" class="modelo.Tpais" lazy="false" fetch="select">
+            <column name="id_pais" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tprofesion" class="modelo.Tprofesion" lazy="false" fetch="select">
+            <column name="id_profesion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ttipoDocumento" class="modelo.TtipoDocumento" lazy="false" fetch="select">
+            <column name="id_tipo_doc" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ttipoEmpleado" class="modelo.TtipoEmpleado" lazy="false" fetch="select">
+            <column name="id_tipo_empleado" not-null="true" />
+        </many-to-one>
+        <property name="codEmpleado" type="string">
+            <column name="cod_empleado" length="20" not-null="true" />
+        </property>
+        <property name="primerApellido" type="string">
+            <column name="primer_apellido" length="50" not-null="true" />
+        </property>
+        <property name="segundoApellido" type="string">
+            <column name="segundo_apellido" length="50" />
+        </property>
+        <property name="nombres" type="string">
+            <column name="nombres" length="80" not-null="true" />
+        </property>
+        <property name="nroIdentidad" type="string">
+            <column name="nro_identidad" length="20" not-null="true" unique="true" />
+        </property>
+        <property name="fechaNac" type="timestamp">
+            <column name="fecha_nac" length="19" not-null="true" />
+        </property>
+        <property name="lugarNacimiento" type="string">
+            <column name="lugar_nacimiento" length="60" />
+        </property>
+        <property name="sexo" type="char">
+            <column name="sexo" length="1" not-null="true" />
+        </property>
+        <property name="sueldoBruto" type="big_decimal">
+            <column name="sueldo_bruto" precision="16" not-null="true" />
+        </property>
+        <property name="fecAlta" type="timestamp">
+            <column name="fec_alta" length="19" not-null="true" />
+        </property>
+        <property name="fecBaja" type="timestamp">
+            <column name="fec_baja" length="19" />
+        </property>
+        <property name="creadoPor" type="string">
+            <column name="creado_por" length="20" not-null="true" />
+        </property>
+        <property name="modificadoPor" type="string">
+            <column name="modificado_por" length="20" />
+        </property>
+        <property name="fecModificado" type="timestamp">
+            <column name="fec_modificado" length="19" />
+        </property>
+        <property name="foto" type="binary">
+            <column name="foto" />
+        </property>
+        <property name="tel1" type="string">
+            <column name="tel1" length="20" not-null="true" />
+        </property>
+        <property name="tel2" type="string">
+            <column name="tel2" length="20" />
+        </property>
+        <property name="correo1" type="string">
+            <column name="correo1" length="20" not-null="true" />
+        </property>
+        <property name="correo2" type="string">
+            <column name="correo2" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>

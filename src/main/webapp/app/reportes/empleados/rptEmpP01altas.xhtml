@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"   
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    lang="en">
+
+    <h:head>
+        <meta charset="UTF-8"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="../../../WEB-INF/plantillas/formLayout.xhtml">
+            <ui:define name="content">
+                <section style="margin-left: 400px; margin-top: 80px; height: 480px;">
+
+                    <h:form id="reporte" style="width: 45%; height: 40%;">
+                        <p:panel header="Reporte de nuevos empleados">
+
+                            <h:panelGrid columns="1">
+                                <p:outputLabel value="Fecha Inicial"/>
+                                <p:datePicker value="#{rptAltasBeans.fdesde}" showButtonBar="true" pattern="dd/MM/yyyy" />
+                                <p:outputLabel value="Fec. Finalización"/>
+                                <p:datePicker  value="#{rptAltasBeans.fhasta}" showButtonBar="true" pattern="dd/MM/yyyy"/>
+                            </h:panelGrid>
+                            <br/>
+                                <h:commandButton value="Imprimir" class="btn btn-primary" 
+                                                 actionListener="#{rptAltasBeans.rptAltas()}"/>
+                                <h:commandButton value="Cancelar" style="margin-left: 7px" class="btn btn-primary" actionListener="#{rptAniversarioBeans.rptAniversarios()}"/>
+
+                        </p:panel>
+
+
+                    </h:form>
+                </section>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
