@@ -21,7 +21,6 @@
         <param-value>true</param-value>
     </context-param>
 
- 
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/favicon.ico</url-pattern>
