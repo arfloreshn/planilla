@@ -30,7 +30,6 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/view/*</url-pattern>
         <url-pattern>*.xhtml</url-pattern>
-        <url-pattern>*.jsp</url-pattern>
     </servlet-mapping>
 
 
@@ -46,7 +45,7 @@
 
         
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>login.xhtml</welcome-file>
     </welcome-file-list>
 
 </web-app>
