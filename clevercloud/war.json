@@ -4,7 +4,7 @@
       "goal": "package"
    },
    "deploy": {
-      "container": "TOMCAT8",
+      "container": "GLASSFISH5",
       "war": [
          {
             "file": "target/planilla.war"
