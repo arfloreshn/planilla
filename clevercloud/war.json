@@ -4,7 +4,7 @@
       "goal": "package"
    },
    "deploy": {
-      "container": "GLASSFISH4",
+      "container": "WILDFLY9",
       "war": [
          {
             "file": "target/planilla.war"

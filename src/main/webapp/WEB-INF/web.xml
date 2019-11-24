@@ -28,7 +28,7 @@
   
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/planilla/*</url-pattern>
+        <url-pattern>/view/*</url-pattern>
         <url-pattern>*.jsp</url-pattern>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
