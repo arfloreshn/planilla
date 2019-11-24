@@ -4,7 +4,7 @@
       "goal": "package"
    },
    "deploy": {
-      "container": "GLASSFISH4",
+      "container": "GLASSFISH5",
       "war": [
          {
             "file": "target/planilla.war"
@@ -12,6 +12,3 @@
       ]
    }
 }
-
-
-git remote add clever git+ssh://git@push.clever-cloud.com/app_2e98f08f-d72f-4b34-9afb-54c9b544d6b0.git
