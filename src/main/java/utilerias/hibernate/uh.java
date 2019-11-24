@@ -7,7 +7,11 @@ package utilerias.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -18,12 +22,21 @@ import org.hibernate.cfg.Configuration;
 public class uh {
 
  
-      private static final SessionFactory sessionFactory = buildSessionFactory();
+     static SessionFactory sessionFactory = buildSessionFactory();
+    private static StandardServiceRegistry registry;
+
 
     private static SessionFactory buildSessionFactory() {
+ 
         try {
-            // Create the SessionFactory from hibernate.cfg.xml
-            return new Configuration().configure().buildSessionFactory();
+
+         registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+         MetadataSources sources = new MetadataSources(registry);
+         Metadata metadata = sources.getMetadataBuilder().build();
+         sessionFactory = metadata.getSessionFactoryBuilder().build();
+            
+   
+   return sessionFactory;
         }
         catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed

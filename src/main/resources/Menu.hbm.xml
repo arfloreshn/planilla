@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 05-13-2019 07:40:16 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="modelo.Menu" table="menu" catalog="planilla" optimistic-lock="version">
+    <class name="modelo.Menu" table="menu" catalog="bdpeofvhv3aoijwogi0i" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />

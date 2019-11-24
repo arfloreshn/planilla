@@ -34,22 +34,7 @@ public class HibernateUtil {
          Metadata metadata = sources.getMetadataBuilder().build();
          sessionFactory = metadata.getSessionFactoryBuilder().build();
             
-            /*
-
-            // Creating Configuration Instance & Passing Hibernate Configuration File
-//        Configuration configObj = new Configuration();
-  //      configObj.configure("hibernate.cfg.xml");
- 
-        // Since Hibernate Version 4.x, ServiceRegistry Is Being Used
-        //ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(configObj.getProperties()).build(); 
- //
-        // Creating Hibernate SessionFactory Instance
-   //     sessionFactory = configObj.buildSessionFactory(serviceRegistryObj);
-     
-sessionFactory = new MetadataSources(registry)
-                 .buildMetadata()
-        .buildSessionFactory();*/
-
+   
    return sessionFactory;
         }
         catch (Throwable ex) {
