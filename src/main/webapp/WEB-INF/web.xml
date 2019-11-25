@@ -21,15 +21,10 @@
         <param-value>true</param-value>
     </context-param>
 
+
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/favicon.ico</url-pattern>
-    </servlet-mapping> 
-  
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/view/*</url-pattern>
-        <url-pattern>*.jsp</url-pattern>
+        <url-pattern>/planilla/*</url-pattern>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
@@ -43,7 +38,6 @@
             30
         </session-timeout>
     </session-config>
-
         
     <welcome-file-list>
         <welcome-file>login.xhtml</welcome-file>
