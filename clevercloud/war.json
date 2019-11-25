@@ -7,7 +7,8 @@
       "container": "PAYARA4",
       "war": [
          {
-            "file": "target/planilla.war"
+            "file": "target/planilla.war",
+			"context": "/planilla"
          }
       ]
    }

@@ -24,7 +24,7 @@
 
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/planilla/*</url-pattern>
+        <url-pattern>/mox/*</url-pattern>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 

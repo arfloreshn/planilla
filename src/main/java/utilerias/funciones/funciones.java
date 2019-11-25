@@ -19,14 +19,21 @@ public class funciones {
 
     private int nro_correlativo = 0;
         
-     
+    
     FacesContext facesContext = FacesContext.getCurrentInstance();
     ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
     String path =  servletContext.getRealPath(PathInicio()); 
+   
+    
+    public String getHome() {
+        return path;
+    }
     
     public static String PathInicio()
     {
-        return "http://localhost:8080/planilla";
+        
+        return "/planilla";
+       /// return "http://localhost:8080/planilla";
     }
 
     public static String PathApp()

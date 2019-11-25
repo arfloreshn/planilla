@@ -7,7 +7,10 @@ package menu.controlador;
 
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import utilerias.funciones.funciones;
+import static utilerias.funciones.funciones.PathInicio;
 
 /**
  *
@@ -17,10 +20,18 @@ import utilerias.funciones.funciones;
 @ApplicationScoped
 public class homeBean implements java.io.Serializable {
 
+    
+     FacesContext facesContext = FacesContext.getCurrentInstance();
+    ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+    String path =  servletContext.getRealPath(PathInicio()); 
+    String contexto = servletContext.getRealPath(""); 
+    String path2 = this.getClass().getClassLoader().getResource("").getPath();
+    
     /**
      * Creates a new instance of homeBean
      */
     public homeBean() {
+         String path2 = this.getClass().getClassLoader().getResource("").getPath();
          getHomeUrl();
     }
     

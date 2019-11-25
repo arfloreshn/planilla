@@ -7,13 +7,12 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       >
-    <body>
-        <div class="sidebar">
-            <div class="sidebar-background"></div>
-            <div class="sidebar-wrapper scrollbar-inner">
-                <div class="sidebar-content">
+        <ui:composition>
+            <div class="sidebar">
+                <div class="sidebar-background"></div>
+                <div class="sidebar-wrapper scrollbar-inner">
+                    <div class="sidebar-content">
 
-                    <ui:composition>
                         <h:form id="Menu">
                             <p:panelMenu model="#{menuBean.model}">
                                 <f:facet name="options">
@@ -25,13 +24,13 @@
                                 </f:facet>
                             </p:panelMenu>
                         </h:form>
-                    </ui:composition>
+                    </div>
                 </div>
             </div>
-        </div>
+
+        </ui:composition>
         <!-- End Sidebar -->
 
-    </body>
 </html>
 
 
