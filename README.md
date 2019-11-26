@@ -1,8 +1,19 @@
-# Project com.arflores.hn/planilla
+# Modulo de Planilla
 
-Steps to run this project:
+    Creado por: Allan Ramiro Flores Murillo.
+  Nacionalidad: Hondureña.
+  Proposito:
 
-1. Start your Docker daemon
-2. Execute `./buildAndRun.sh` (Linux/MacOs) or `buildAndRun.bat` (Windows)
-3. Wait until Open Liberty is up- and running (e.g. use `docker logs -f CONTAINER_ID`)
-4. Visit http://localhost:9080/
+# Requisitos:
+- Netbeans 11.2 soporta Netbeans 8.2
+- Jdk 1.8 u(233)
+- MySQL 5.7
+- Primefaces 7.0
+- java-api-ee8.
+
+# Compatible con los siguiente servidores de aplicaciones
+- GlassFish 5.1
+- Payara 5.191
+- TomEE 8
+- WildFly 17
+
