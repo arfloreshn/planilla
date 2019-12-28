@@ -4,8 +4,9 @@
   Nacionalidad: Hondureña.
   Proposito:
 
-![Modulo de planilla]
-(https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl02.png)
+<p align="center">
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl02.png" width="350" title="Abm de empleados">
+</p>
   
 # Requisitos:
 - Netbeans 11.2 soporta Netbeans 8.2
