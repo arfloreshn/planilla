@@ -21,3 +21,27 @@
 - TomEE 8
 - WildFly 17
 
+# VALIDACION DE ACCESOS
+<p>
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl01.png" width="100%" height="500" title="Abm de empleados">
+</p>
+
+# CRUD/ABM DE MANTENIMIENTO ESTANDAR
+<p>
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl03.png" width="100%" height="500" title="Abm de mantenimiento">
+</p>
+
+# MAESTRO / DETALLE DE ENTIDADES REFERENCIALES
+<p>
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl04.png" width="100%" height="500" title="Maestro/detalle">
+</p>
+
+# PANTALLAS DE DIALOGO
+<p>
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl05.png" width="100%" height="500" title="Maestro/detalle">
+</p>
+
+# REPORTERIA
+<p>
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl09.png" width="100%" height="500" title="Maestro/detalle">
+</p>
