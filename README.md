@@ -42,11 +42,6 @@
   <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl04.png" width="100%" height="500" title="Maestro/detalle">
 </p>
 
-# FORMULARIOS DE DIALOGO
-<p>
-  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl05.png" width="100%" height="500" title="DIALOGO">
-</p>
-
 # FORMULARIOS DE BUSQUEDA
 <p>
   <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl06.png" width="100%" height="500" title="Maestro/detalle">
