@@ -4,8 +4,8 @@
   Nacionalidad: Hondureña.
   Proposito:
 
-<p align="center">
-  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl02.png" width="350" title="Abm de empleados">
+<p>
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl02.png" width="800" height="800" title="Abm de empleados">
 </p>
   
 # Requisitos:
