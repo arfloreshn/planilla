@@ -4,6 +4,9 @@
   Nacionalidad: Hondureña.
   Proposito:
 
+![Modulo de planilla]
+https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl02.png  
+  
 # Requisitos:
 - Netbeans 11.2 soporta Netbeans 8.2
 - Jdk 1.8 u(233)
