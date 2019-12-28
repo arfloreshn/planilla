@@ -32,19 +32,24 @@
   <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl07.png" width="100%" height="500" title="Abm de mantenimiento">
 </p>
 
-# CRUD/ABM DE MANTENIMIENTO BASICOS
+# FORMULARIO CRUD/ABM DE MANTENIMIENTO BASICO
 <p>
   <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl03.png" width="100%" height="500" title="Abm de mantenimiento">
 </p>
 
-# MAESTRO / DETALLE DE ENTIDADES REFERENCIALES
+# FORMULARIO MAESTRO/ DETALLE REFERENCIALES
 <p>
   <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl04.png" width="100%" height="500" title="Maestro/detalle">
 </p>
 
-# PANTALLAS DE DIALOGO
+# FORMULARIOS DE DIALOGO
 <p>
   <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl05.png" width="100%" height="500" title="DIALOGO">
+</p>
+
+# FORMULARIOS DE BUSQUEDA
+<p>
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl06.png" width="100%" height="500" title="Maestro/detalle">
 </p>
 
 # REPORTERIA
@@ -52,8 +57,15 @@
   <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl09.png" width="100%" height="500" title="Reporteria">
 </p>
 
-# PERSONALIZACION DE MENSAJES DE ERROR
+# PERSONALIZACION DEL FORMULARIO DE ERROR DE LAS RESPUESTAS DEL SERVIDOR
 <p>
-  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl06.png" width="100%" height="500" title="Maestro/detalle">
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl08.png" width="100%" height="500" title="Reporteria">
 </p>
+
+
+# PERSONALIZACION DEL FORMULARIO DE LOS OBJETVOS Y RUTAS NO ENCONTRADAS
+<p>
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl10.png" width="100%" height="500" title="Reporteria">
+</p>
+
 
