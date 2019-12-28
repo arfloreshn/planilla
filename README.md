@@ -2,7 +2,7 @@
 
     Creado por: Allan Ramiro Flores Murillo.
   Nacionalidad: Hondureña.
-  Proposito:
+  Proposito: Venta $1000.00
 
 <p>
   <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl02.png" width="100%" height="500" title="Abm de empleados">
