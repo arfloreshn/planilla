@@ -4,12 +4,19 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://bdpeofvhv3aoijwogi0i-mysql.services.clever-cloud.com:3306/bdpeofvhv3aoijwogi0i?useSSL=false</property>
+   <!-- <property name="hibernate.connection.url">jdbc:mysql://bdpeofvhv3aoijwogi0i-mysql.services.clever-cloud.com:3306/bdpeofvhv3aoijwogi0i?useSSL=false</property>
     <property name="hibernate.connection.username">u05wnqtmcroamfee</property>
-    <property name="hibernate.connection.password">zjJ8FJWQuypQGpeBU1uH</property>
+    <property name="hibernate.connection.password">zjJ8FJWQuypQGpeBU1uH</property>-->
+   
+   <!-- Conexcion a mi computadora -->
+    <property name="hibernate.connection.url">jdbc:mysql://192.168.0.19:3306/planilla?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">Denver$8</property>
+    
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping resource="EmpMae.hbm.xml"/>
     <mapping resource="EmpCtaBco.hbm.xml"/>
     <mapping resource="EmpMovimiento.hbm.xml"/>

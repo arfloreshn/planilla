@@ -511,6 +511,7 @@
                             </p:tabView>
                         </p:panel>
  <br/>
+                 
                         <p:panel id="panelfoto" header="Cambiar fotografía" 
                                  toggleable="true" toggleSpeed="500"
                                  closable="true" closeSpeed="500"
@@ -521,31 +522,36 @@
                                           label="Buscar" 
                                           uploadLabel="Subir"
                                           cancelLabel="cancelar"
-                                          mode="advanced" 
+                                          mode="advanced"
+                                          multiple="true"
+                                          auto="false"
                                           dragDropSupport="true"
-                                          skinSimple="false"
                                           fileLimitMessage="Seleccione un(1) archivo"
                                           invalidFileMessage="Archivo no valido"
                                           invalidSizeMessage="El tamaño es muy grande"
                                           fileUploadListener="#{empleadosBean.subirfoto}"
-                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                                          allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
                                           update=":Empleados:fotografia"
                                           >
                             </p:fileUpload>
-
-
+                  
+                            
                         </p:panel>
 
 
-                        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                            <p:graphicImage name="/images/gifs/5.gif" />
+                        <p:dialog widgetVar="statusDialog" modal="true" 
+                                  draggable="false" 
+                                  closable="false" 
+                                  resizable="false" 
+                                  showHeader="false">
+                            <p:graphicImage name="#{homeBean.homeUrl}/resources/images/gifs/5.gif" />
                         </p:dialog>
 
                     </h:form>
 
                 </div>
 
-                <h:form id="lstempleados" style="width: 70%; font-size: 14px;">
+                <h:form id="lstempleados" style="width: 90%; height: 80%; font-size: 14px;">
                     <p:dialog id="dlgEmpleado" width="700px" 
                               header="Listado de empleado" widgetVar="dlgEmpleado" modal="true" 
                               showEffect="fade" hideEffect="fade" resizable="true">
@@ -553,7 +559,7 @@
                                      var="emp" 
                                      value="#{empleadosBean.lstEmpleados}"
                                      emptyMessage="No hay datos a mostrar"  
-                                     paginator="true" rows = "10" 
+                                     paginator="true" rows = "5" 
                                      style="width: 100%; font-size: 14px;"
                                      rowsPerPageTemplate="5,10,15,20,25,30,40,50"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
@@ -562,21 +568,33 @@
                                 <h:outputText value="#{emp.codEmpleado}"> </h:outputText> 
                             </p:column>
 
-                            <p:column headerText="Apellidos/Nombres" style="width:40px; font-size: 10px ">
-                                <h:outputText value="#{emp.primerApellido} #{emp.segundoApellido} / #{emp.nombres}"> </h:outputText> 
+                            <p:column filterBy="#{emp.primerApellido}" 
+                                 headerText="1er Apellido" style="width:10%; font-size: 10px ">
+                                <h:outputText value="#{emp.primerApellido}"> </h:outputText> 
+                            </p:column>
+                            
+                            <p:column filterBy="#{emp.segundoApellido}" 
+                                 headerText="2do Apellido" style="width:10%; font-size: 10px ">
+                                <h:outputText value="#{emp.segundoApellido}"> </h:outputText> 
                             </p:column>
 
-                            <p:column headerText="Fec. Ingreso" style="width: 8px; font-size: 10px ">
+                            <p:column filterBy="#{emp.nombres}" 
+                                 headerText="Nombres" style="width:10%; font-size: 10px ">
+                                <h:outputText value="#{emp.nombres}"> </h:outputText> 
+                            </p:column>
+
+                            
+                            <p:column headerText="Fec. Ingreso" style="width: 10%; font-size: 10px ">
                                 <h:outputText value="#{emp.fecAlta}"> </h:outputText> 
                             </p:column>
 
-                            <p:column headerText="Cargo. Oficina" style="width: 10px; font-size: 10px ">
+                            <p:column headerText="Cargo. Oficina" style="width: 10%; font-size: 10px ">
                                 <h:outputText value="#{emp.tcargo.nomCargo}"> </h:outputText> 
                             </p:column>
 
 
                             <p:column headerText="Seleccione" 
-                                      style="width:10%;text-align: left;font-size: 12px; align-content: center; align-items: center">
+                                      style="width:8%;text-align: left;font-size: 12px; align-content: center; align-items: center">
 
                                 <!-- *-*-*-*-*-* ACTUALIZAR EDITAR *-*-*-*-*-*-*-* -->
 

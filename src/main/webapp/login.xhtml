@@ -5,8 +5,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Acceso</title>
+        <title>Planilla</title>
         <link href="resources/css/login.css" type="text/css" rel="stylesheet"/>
+        <link href="resources/images/favicon.ico" type="image/x-icon" rel="icon" />
+       <!-- <link href="resources/images/favicon.png"  type="image/png" sizes="16x16" rel="png" />-->
     </h:head>
 
     <h:body>
@@ -20,21 +22,26 @@
                 <p:panel header="Ingrese su usuario y clave" widgetVar="dlg">
                     <h:panelGrid columns="2" cellpadding="5" style="width: 90%">
                         <h:outputLabel for="username" value="Usuario:"/>
-                        <p:inputText id="username" value="#{loginBean.user.usuario}" 
+                        <p:inputText id="username"  value="#{loginBean.user.usuario}"
                                      placeholder="Ingrese su usuario" required="true" label="Usuario:" />
 
                         <h:outputLabel for="password"  value="Clave:"/>
                         <p:password id="password" placeholder="Ingrese su contrasenia" 
-                                    value="#{loginBean.user.clave}" required="true" label="Clave:" />
+                                    value="#{loginBean.user.clave}" 
+                                    required="true" 
+                                    label="Clave:" />
 
                         <f:facet name="footer">
                             <p:commandButton style="margin-left: 75px; width: 50%"
                                              value="Aceptar" update="formlogin" 
                                              actionListener="#{loginBean.login(event)}"
-                                             icon="icon-login" oncomplete="ValidaRespuesta(xhr, status, args)"/>
-                        </f:facet>  
+                                             icon="fa fa-user" 
+                                             oncomplete="ValidaRespuesta(xhr, status, args)"/>
+                       
+                        </f:facet>
+                        
                     </h:panelGrid>
-
+               
                 </p:panel>
 
             </h:form>
@@ -42,12 +49,22 @@
         </div>
 
         <script type="text/javascript">
+       
+            function GrabarLocalStore() 
+            {
+             // var usuario = document.getElementById("formlogin:username").value;  
+             // localStorage.setItem('usuario', usuario);
+            };
+         
             function ValidaRespuesta(xhr, status, args) {
 
-                if (args.validationFailed || !args.loggedIn) {
+               var usuario = document.getElementById("formlogin:username").value;  
+               localStorage.setItem('usuario', usuario);
+              
+                if (args.validationFailed || !args.LoginOn) {
                     jQuery('#formlogin').effect("shake", {times: 5}, 100);
                 } else {
-                    location.href = args.PathHomePages;
+                     location.href = args.PathHomePages;
                 }
             }
         </script>

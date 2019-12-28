@@ -5,6 +5,9 @@
  */
 package utilerias.System;
 
+import com.lowagie.text.BadElementException;
+import com.lowagie.text.DocumentException;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -17,5 +20,6 @@ public interface clsSistema {
   public java.sql.Timestamp getFechaHoraHoy();
   public java.sql.Timestamp getDateTime(java.util.Date  var_fecha);
   public int NroCorrelativo(String Tabla) throws Exception;
-    
+  public void postProcessXLS(Object document);
+  public void preProcessPDF(Object document) throws IOException, BadElementException, DocumentException;  
 }

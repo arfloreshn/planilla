@@ -22,6 +22,7 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.engine.util.JRLoader;
+import static utilerias.funciones.funciones.rptsEmpleados;
 import static utilerias.jodbc.dbConexcion.getConnection;
 
 

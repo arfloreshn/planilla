@@ -8,7 +8,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       >
     <h:body>
-        <ui:composition template="../../WEB-INF/plantillas/formLayout.xhtml">
+    <ui:composition template="../../WEB-INF/plantillas/formLayout.xhtml">
 
             <ui:define name="content">
                 <p:growl id="growl" showDetail="true"/>
@@ -49,13 +49,13 @@
                             </p:column>
 
                             <p:column filterBy="#{dep.nomDepto}"
-                                      sortBy="#{dep.nomDepto}" filterMatchMode="contains" style="width:70%">
+                                      sortBy="#{dep.nomDepto}" filterMatchMode="contains" style="width:40%">
                                 <f:facet name="header">
                                     Descripcion del departamento
                                 </f:facet>
                                 <h:outputText value="#{dep.nomDepto}"> </h:outputText> 
                             </p:column>
-                            <p:column headerText="Escoja su opcion" style="width:15px;text-align: left">
+                            <p:column headerText="Escoja su opcion" style="width:8%;text-align: left">
 
                                 <!-- *-*-*-*-*-* ACTUALIZAR EDITAR *-*-*-*-*-*-*-* -->
 

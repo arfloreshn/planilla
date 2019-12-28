@@ -33,10 +33,9 @@ public class HibernateUtil {
          MetadataSources sources = new MetadataSources(registry);
          Metadata metadata = sources.getMetadataBuilder().build();
          sessionFactory = metadata.getSessionFactoryBuilder().build();
-            
-   
-   return sessionFactory;
+         return sessionFactory;
         }
+      
         catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
             System.err.println("Initial SessionFactory creation failed." + ex);

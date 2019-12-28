@@ -9,7 +9,7 @@
       >
     <h:body>
         <ui:composition template="../../WEB-INF/plantillas/formLayout.xhtml">
-       
+
             <ui:define name="content">
                 <p:growl id="growl" showDetail="true"/>
                 <div id="cargos" class="contenidoMaestro">
@@ -19,18 +19,35 @@
                         <p:toolbar>
 
                             <p:toolbarGroup align="right">
-                                <!-- *-*-*-*-*-* CREAR REGISTRO *-*-*-*-*-*-*-* -->
-                                <p:commandButton update=":frmcrear" oncomplete="PF('dlgCrear').show()" 
-                                                 icon="icon-new"  title="Crear" value="Crear" 
-                                                 actionListener="#{cargosBean.instanciar}">
+                                <div style=" height: 20px; float:right;padding-top: 1px;">
 
-                                </p:commandButton>
+                                    <h:commandLink>
+                                        <p:graphicImage  library="images" name="excel-icon.png" width="24"/>
+                                        <p:dataExporter type="xls" target="dtCargo" fileName="cargos" postProcessor="#{cargosBean.postProcessXLS}"/>
+                                     <!--   <p:dataExporter type="xls" target="dtCargo" fileName="cargos" postProcessor="{cargosBean.postProcessXLS}"/> -->
+
+                                    </h:commandLink>
+
+                                    <h:commandLink>
+                                        <p:graphicImage library ="images" name="pdf-icon.png" width="24"/>
+                                        <p:dataExporter type="pdf" target="dtCargo" fileName="cargos"/>
+                                        <!--<p:dataExporter type="pdf" target="dtCargo" fileName="cargos" preProcessor="{cargosBean.postProcessPDF}"/> -->
+
+                                    </h:commandLink>
+
+                                    <h:commandLink>
+                                        <p:graphicImage library="images" name="csv-icon.png" width="24"/>
+                                        <p:dataExporter type="csv" target="dtCargo" fileName="cargos" />
+                                    </h:commandLink>
+
+                                </div>
+
                             </p:toolbarGroup>
 
-                        </p:toolbar>
+                        </p:toolbar> 
 
-
-                        <p:dataTable id="dtCargo" var="car" value="#{cargosBean.lstCargos()}" 
+                        <p:dataTable id="dtCargo" var="car" 
+                                     value="#{cargosBean.lstCargos()}" 
                                      paginator="true" rows = "10" 
                                      style="width: 100%; font-size: 14px;"
                                      rowsPerPageTemplate="5,10,15,20,25,30,40,50"
@@ -48,19 +65,35 @@
                             </p:column>
 
                             <p:column filterBy="#{car.nomCargo}"
-                                      sortBy="#{car.nomCargo}" filterMatchMode="contains" style="width:70%">
+                                      sortBy="#{car.nomCargo}" 
+                                      filterMatchMode="contains" 
+                                      style="width:40%">
                                 <f:facet name="header">
                                     Descripcion del cargo
                                 </f:facet>
                                 <h:outputText value="#{car.nomCargo}"> </h:outputText> 
                             </p:column>
-                            <p:column headerText="Escoja su opcion" style="width:15px;text-align: left">
+
+                            <p:column headerText="Escoja su opcion" style="width:10%;text-align: left">
+
+                                <!-- *-*-*-*-*-* CREAR REGISTRO *-*-*-*-*-*-*-* -->
+                                <p:commandButton update=":frmcrear" 
+                                                 class="ui blue button"
+                                                 icon="fa fa-plus"  
+                                                 title="Crear"  
+                                                 oncomplete="PF('dlgCrear').show()" 
+                                                 action="#{cargosBean.instanciar}">
+
+                                </p:commandButton>
+
 
                                 <!-- *-*-*-*-*-* ACTUALIZAR EDITAR *-*-*-*-*-*-*-* -->
 
                                 <p:commandButton id="btnUpdate" 
-                                                 update=":frmUpdate" oncomplete="PF('dlgModifica').show()" 
-                                                 icon="icon-edit" title="Editar">
+                                                 class="ui green button"
+                                                 icon="fa fa-pencil-square-o" title="Editar"
+                                                 update=":frmUpdate" 
+                                                 oncomplete="PF('dlgModifica').show()">
 
                                     <!-- Cuando se envia un parametro a un formulario dentro de la misma pagina
                                          se hace por medio de alias en este caso "mrol", en caso esta declarado
@@ -72,9 +105,11 @@
                                 </p:commandButton>
 
                                 <!-- *-*-*-*-*-* ELIMINAR REGISTRO  *-*-*-*-*-*-*-*-*-* -->
-                                <p:commandButton id="btnEliminar" update=":frmborrar" 
+                                <p:commandButton id="btnEliminar" 
+                                                 class="ui red button"
+                                                 update=":frmborrar" 
                                                  oncomplete="PF('dlgBorra').show()" 
-                                                 icon="icon-delete" title="Quitar">
+                                                 icon="fa fa-trash" title="Quitar">
                                     <!-- Cuando se envia un parametro a un formulario dentro de la misma pagina
                                          se hace por medio de alias en este caso mrol, en caso esta declarado
                                          previamente, dataTable id="dtrolers" var="mrol" del formulario  id="frmdtrol"
@@ -90,12 +125,11 @@
                             </p:column>
 
                         </p:dataTable>
+
                     </h:form>
 
                 </div>
                 <!-- *-*-*-*-*-* FORMULARIO PARA CREAR REGISTRO  *-*-*-*-*-*-*-*-*-* -->
-
-
                 <h:form id="frmcrear">
                     <p:dialog id="dlgUno" header="Crear cargo" widgetVar="dlgCrear" modal="true" 
                               showEffect="fade" hideEffect="fade" resizable="false">
@@ -164,7 +198,7 @@
                               showEffect="fade" hideEffect="fade" resizable="false">
 
                         <h:outputText value="Esta seguro que desee eliminar?"/> 
-                       <p:panelGrid id="gridDelete"  columns="2" style="margin:0 auto;">
+                        <p:panelGrid id="gridDelete"  columns="2" style="margin:0 auto;">
 
                             <h:outputText value="Id:"/>
                             <p:inputText value="#{cargosBean.cargo.id}" readonly="true" />
@@ -174,7 +208,7 @@
                         </p:panelGrid>
                         <h:inputHidden value="#{cargoBean.cargo.id}" />
                         <br/>
- 
+
                         <p:commandButton id="btnborrareliminar" value="Aceptar" 
                                          update=":frmcargo:dtCargo , :growl" 
                                          actionListener="#{cargosBean.btnborrarCargo(actionevent)}"

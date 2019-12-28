@@ -16,58 +16,81 @@ import javax.servlet.ServletContext;
  */
 public class funciones {
     
-
-    private int nro_correlativo = 0;
-        
+    FacesContext fc = FacesContext.getCurrentInstance();
+    ServletContext sc = (ServletContext) fc.getExternalContext().getContext();
     
-    FacesContext facesContext = FacesContext.getCurrentInstance();
-    ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
-    String path =  servletContext.getRealPath(PathInicio()); 
+    
+    private static final String app="/app/";
+    
+   // Path de los directorios de la vista
+    private static final String catalagos="app/catalagos";
+    private static final String procesos="app/procesos";
+    private static final String pathReportes="app/reportes/";
+    // Path de los directorios de los recursos de la app y jaspertReport
+    private static final String rpts = "app/reportes/rpt/"; 
+    private static final String images = "resources/images//";
+   
+    private static final String contexto="/planilla";
+    private final String RealPath =  sc.getRealPath(contexto);
+
+     private static final String rptsEmpleados =  rpts + "empleados/";
+     private static final String rptsPlanillas =  rpts + "planillas/";
    
     
     public String getHome() {
-        return path;
+        return RealPath;
     }
     
     public static String PathInicio()
     {
-        
-        return "/planilla";
-       /// return "http://localhost:8080/planilla";
+        return contexto;
     }
 
     public static String PathApp()
     {
-        return "/app/";
+        return app;
     }
     
   
     public static String PathFrmCatalagos()
     {
-     return "app/catalagos";
+     return catalagos;
     }
-    
     
      public static String PathFrmProcesos()
     {
-     return  "app/procesos";
+     return  procesos;
     }
      
      public static String PathReporte()
     {
-     return "app/reportes/";
+     return pathReportes;
     } 
    
      public static String PathRpt()
     {
-     return "app/reportes/rpt";
+     return rpts;
     } 
    
      public static String PathImg()
     {
-     return "resources/images//";
+     return images;
     } 
     
+    public static String rptsEmpleados()
+    {
+      return rptsEmpleados;
+    } 
+
+     public static String rptsPlanillas()
+    {
+      return rptsPlanillas;
+    } 
+
+    
+     public ServletContext fnContexto() {
+         return this.sc;
+     }
      
     public static String encriptar(String cadena)
     {
@@ -92,6 +115,5 @@ public class funciones {
       return sb.toString();
     }   
     
-    
-    
+   
 }

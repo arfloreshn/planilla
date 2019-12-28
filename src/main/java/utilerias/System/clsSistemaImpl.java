@@ -5,6 +5,13 @@
  */
 package utilerias.System;
 
+import com.lowagie.text.BadElementException;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.PageSize;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,6 +19,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.LineIterator;
+ 
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.IndexedColors;
+
+import utilerias.funciones.funciones;
 import utilerias.jodbc.dbConexcion;
 
 /**
@@ -60,6 +80,7 @@ public class clsSistemaImpl implements clsSistema  {
     }
     
     
+    @Override
     public int NroCorrelativo(String Tabla) throws Exception {
 
         String sSql = "";
@@ -74,5 +95,35 @@ public class clsSistemaImpl implements clsSistema  {
 
         return this.var_nro_correlativo;
     }
+
+    
+    @Override
+     public void postProcessXLS(Object document) {  
+	    HSSFWorkbook wb = (HSSFWorkbook) document;  
+	    HSSFSheet sheet = wb.getSheetAt(0);  
+	    HSSFRow header = sheet.getRow(0);  
+	      
+	    HSSFCellStyle cellStyle = wb.createCellStyle();
+            cellStyle.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
+	    
+            int columnas = header.getPhysicalNumberOfCells()-1;
+            for(int i=0; i < columnas ;i++) {  
+	        HSSFCell cell = header.getCell(i);  
+	        cell.setCellStyle(cellStyle);  
+	    }  
+	}  
+
+     
+    @Override
+    public void preProcessPDF(Object document) throws IOException, BadElementException, DocumentException {  
+	    Document pdf = (Document) document;  
+	    pdf.open();  
+	    pdf.setPageSize(PageSize.A4);  
+	  
+	//    InputStream stream = funciones.class.getResourceAsStream("planilla/resources/images/rrhh.png");
+	//    byte[] logoBytes =  IOUtils.toByteArray(stream);	   
+	//    pdf.add(Image.getInstance(logoBytes));  
+	} 
+    
 
 }

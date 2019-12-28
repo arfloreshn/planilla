@@ -52,18 +52,21 @@
                             </p:column>
 
                             <p:column filterBy="#{pais.nomPais}"
-                                      sortBy="#{pais.nomPais}" filterMatchMode="contains" style="width:70%">
+                                      sortBy="#{pais.nomPais}" 
+                                      filterMatchMode="contains" 
+                                      style="width:40%">
                                 <f:facet name="header">
                                     Descripcion del pais
                                 </f:facet>
                                 <h:outputText value="#{pais.nomPais}"> </h:outputText> 
                             </p:column>
-                            <p:column headerText="Escoja su opcion" style="width:15px;text-align: left">
+                            <p:column headerText="Escoja su opcion" style="width:8%;text-align: left">
 
                                 <!-- *-*-*-*-*-* ACTUALIZAR EDITAR *-*-*-*-*-*-*-* -->
 
                                 <p:commandButton id="btnUpdate" 
-                                                 update=":frmUpdate" oncomplete="PF('dlgModifica').show()" 
+                                                 update=":frmUpdate" 
+                                                 oncomplete="PF('dlgModifica').show()" 
                                                  icon="icon-edit" title="Editar">
 
                                     <!-- Cuando se envia un parametro a un formulario dentro de la misma pagina

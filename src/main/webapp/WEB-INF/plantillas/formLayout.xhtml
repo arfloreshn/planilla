@@ -1,22 +1,26 @@
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <!-- NO AGREGAR f:View en ninguna parte de este formulario, genera problemas en primefaces-->
-  
+
     <h:head>
-        
+
         <!-- PrimeFlexBox -->
         <link href="#{homeBean.homeUrl}/resources/css/primeflexbox.css" rel="stylesheet"/>
+        <!-- Custom Fonts -->
+        <link href="#{homeBean.homeUrl}/resources/css/font-awesome.min.css" rel="stylesheet"/>
         <!-- Bootstrap Core CSS -->
         <link href="#{homeBean.homeUrl}/resources/css/bootstrap.min.css" rel="stylesheet"/>
-        <!-- Custom Fonts -->
-        <link href="#{homeBean.homeUrl}/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Semantic CSS -->
+        <link href="#{homeBean.homeUrl}/resources/semantic/semantic.min.css" rel="stylesheet"/>
         <!-- Custom CSS -->
-        <link href="#{homeBean.homeUrl}/resources/css/startmin.css" rel="stylesheet"/>
-        
+        <link href="#{homeBean.homeUrl}/resources/css/planilla.css" rel="stylesheet"/>
+
+        <link href="resources/images/favicon.ico" type="image/x-icon" rel="icon" />
         <title>Planilla</title>
         <f:facet name="first">
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -24,16 +28,17 @@
             <meta http-equiv="cache-control" content="no-cache"/>
             <meta http-equiv="expires" content="0"/>
         </f:facet>
-        
-     </h:head>
+
+    </h:head>
 
     <h:body>
+        
         <div id="encabezado" class="ui-widget-header">
-                <ui:insert name="header" >
-                    <ui:include src="formHeader.xhtml" />
-                </ui:insert>
-        </div>
-
+           <ui:insert name="header">
+                <ui:include src="formHeader.xhtml" />
+            </ui:insert>
+         </div> 
+        
         <div id="cuerpo">
             <div id="lateral">
                 <ui:insert name="west" >
@@ -46,7 +51,13 @@
                     <ui:include src="formContent.xhtml" />
                 </ui:insert>
             </div>
+
+
         </div>
+
+        <script src="#{homeBean.homeUrl}/resources/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="#{homeBean.homeUrl}/resources/js/popper.min.js" type="text/javascript"></script>
+        <script src="#{homeBean.homeUrl}/resources/semantic/semantic.min.js" type="text/javascript"></script>
     </h:body>
 
 </html>
