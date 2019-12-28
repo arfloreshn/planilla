@@ -13,6 +13,7 @@
 - Jdk 1.8 u(233)
 - MySQL 5.7
 - Primefaces 7.0
+- Semantic-ui
 - java-api-ee8.
 
 # Compatible con los siguiente servidores de aplicaciones
@@ -26,7 +27,12 @@
   <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl01.png" width="100%" height="500" title="Abm de empleados">
 </p>
 
-# CRUD/ABM DE MANTENIMIENTO ESTANDAR
+# PROCESOS MASIVOS DE PAGO DE PLANILLAS
+<p>
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl07.png" width="100%" height="500" title="Abm de mantenimiento">
+</p>
+
+# CRUD/ABM DE MANTENIMIENTO BASICOS
 <p>
   <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl03.png" width="100%" height="500" title="Abm de mantenimiento">
 </p>
@@ -38,10 +44,16 @@
 
 # PANTALLAS DE DIALOGO
 <p>
-  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl05.png" width="100%" height="500" title="Maestro/detalle">
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl05.png" width="100%" height="500" title="DIALOGO">
 </p>
 
 # REPORTERIA
 <p>
-  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl09.png" width="100%" height="500" title="Maestro/detalle">
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl09.png" width="100%" height="500" title="Reporteria">
 </p>
+
+# PERSONALIZACION DE MENSAJES DE ERROR
+<p>
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl06.png" width="100%" height="500" title="Maestro/detalle">
+</p>
+
