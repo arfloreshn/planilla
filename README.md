@@ -5,7 +5,7 @@
   Proposito:
 
 <p>
-  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl02.png" width="800" height="800" title="Abm de empleados">
+  <img src="https://github.com/arfloreshn/planilla/blob/master/src/main/webapp/resources/images/fondos/pl02.png" width="100%" height="500" title="Abm de empleados">
 </p>
   
 # Requisitos:
