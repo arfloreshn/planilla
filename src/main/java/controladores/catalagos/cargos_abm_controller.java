@@ -19,7 +19,7 @@ import modelo.Tcargo;
 import utilerias.System.clsSistema;
 import utilerias.System.clsSistemaImpl;
         
- @Named(value = "cargosBean")
+@Named(value = "cargosBean")
 @RequestScoped
 public class cargos_abm_controller implements java.io.Serializable{
  
