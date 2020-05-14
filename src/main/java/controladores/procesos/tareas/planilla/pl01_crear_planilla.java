@@ -9,23 +9,33 @@ import dao.implementar.catalagos.periodosDaoImpl;
 import dao.implementar.catalagos.tctasbcoDaoImpl;
 import dao.implementar.catalagos.ttipoMonedaDaoImpl;
 import dao.implementar.catalagos.ttipoPlanillaDaoImpl;
+import dao.implementar.empleados.empleadoDaoImpl;
+
+
 import dao.interfaz.catalagos.periodosDao;
 import dao.interfaz.catalagos.tctasBcoDao;
 import dao.interfaz.catalagos.ttipoMonedaDao;
 import dao.interfaz.catalagos.ttipoPlanillaDao;
+import dao.interfaz.empleados.empleadoDao;
+
 import utilerias.colecciones.planRedTmpWkfDataModel;
 import utilerias.colecciones.planResTmpWkf;
-import dao.implementar.empleados.empleadoDaoImpl;
-import dao.interfaz.empleados.empleadoDao;
+
+
+// Librerias de uso comun en java
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+// Librerias del JSF 372 
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.annotation.PostConstruct;
+// Tablas (Declaracion de objetos de tipo tabla)
 import modelo.EmpMae;
 import modelo.PlanDetWkf;
 import modelo.PlanMaeWkf;
@@ -34,12 +44,13 @@ import modelo.TbancoCtas;
 import modelo.Tmoneda;
 import modelo.TtipoPlanilla;
 import modelo.Usuario;
+//Librerias de primefacees
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.ToggleSelectEvent;
 import org.primefaces.event.UnselectEvent;
 import dao.implementar.planilla.planillaImpl;
 import dao.interfaz.planilla.planillaDao;
-import javax.annotation.PostConstruct;
+
 import utilerias.System.clsSistemaImpl;
 import utilerias.System.clsSistema;
 
@@ -47,7 +58,7 @@ import utilerias.System.clsSistema;
  *
  * @author AllanRamiro
  */
-@Named(value = "planillacrearBean")
+@Named(value = "pl01_crear_planilla")
 @ViewScoped
 public class pl01_crear_planilla implements Serializable {
 
@@ -98,7 +109,7 @@ public class pl01_crear_planilla implements Serializable {
     
     
     public pl01_crear_planilla() {
-        iniciar_variables();
+       // iniciar_variables();
     }
 
     private void iniciar_variables() 
@@ -176,6 +187,8 @@ public class pl01_crear_planilla implements Serializable {
     public void setmPeriodo(int mPeriodo) {
         this.mPeriodo = mPeriodo;
     }
+
+    
 
     public int getManio() {
         return manio;
@@ -350,6 +363,7 @@ public class pl01_crear_planilla implements Serializable {
         this.var_nro_planilla = objSystem.NroCorrelativo("plan_mae_wkf"); //Obtengo el numero de planilla
 
         this.var_planMaeWkf = new PlanMaeWkf();
+        
         var_planMaeWkf.setNroPlanilla(this.var_nro_planilla);
         var_planMaeWkf.setNroPeriodo(this.mPeriodo);
         var_planMaeWkf.setAnioPeriodo(this.manio);
@@ -381,6 +395,7 @@ public class pl01_crear_planilla implements Serializable {
                 //Inicializo la tabla de resumen por cada empleado
                 //tengo que recorrer a todos los empleados
                 this.var_PlanResWkf = new PlanResWkf();
+                
                 var_PlanResWkf.setPeriodo(mPeriodo);
                 var_PlanResWkf.setAnio(manio);
                 var_PlanResWkf.setNroPlanilla(var_nro_planilla);

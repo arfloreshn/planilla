@@ -11,7 +11,6 @@ import com.lowagie.text.DocumentException;
 import com.lowagie.text.PageSize;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,8 +19,6 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.LineIterator;
  
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -31,7 +28,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
-import utilerias.funciones.funciones;
 import utilerias.jodbc.dbConexcion;
 
 /**

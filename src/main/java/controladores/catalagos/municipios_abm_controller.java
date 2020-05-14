@@ -16,8 +16,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+import javax.faces.view.ViewScoped;
 import modelo.TdeptoPais;
 import modelo.Tmunicipios;
 import modelo.Tpais;
@@ -28,7 +30,7 @@ import utilerias.funciones.msgbox;
  * @author AllanRamiro
  */
 @Named(value = "municipiosBean")
-@ApplicationScoped
+@ViewScoped
 public class municipios_abm_controller implements java.io.Serializable {
 
     

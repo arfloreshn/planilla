@@ -24,14 +24,14 @@
                                     <p-panel header="Periodo">
                                         <h:panelGrid columns="2">
                                             <h:outputLabel value="Mes fiscal: "/>
-                                            <h:outputLabel value="#{planillacrearBean.mPeriodo}"/>
+                                            <h:outputLabel value="#{pl01_crear_planilla.mPeriodo}"/>
                                             <h:outputLabel value="Año fiscal: "/>
-                                            <h:outputLabel value="#{planillacrearBean.manio}"/>
+                                            <h:outputLabel value="#{pl01_crear_planilla.manio}"/>
                                             <h:outputLabel value="Responsable: "/>
                                             <h:outputLabel value="arflores"/>
                                             <h:outputLabel value="Fec. de gestión: "/>
                                             <p:datePicker  size="8" 
-                                                           value="#{planillacrearBean.var_fecha_sistema}" 
+                                                           value="#{pl01_crear_planilla.var_fecha_sistema}" 
                                                            showButtonBar="true" pattern="dd/MM/yyyy"/>
                                         </h:panelGrid>
 
@@ -46,10 +46,10 @@
                                             <p:selectOneMenu  id="cbotipoplanilla" 
                                                               required="true"
                                                               style="width: 180px"
-                                                              value="#{planillacrearBean.var_Tipoplanilla}"
+                                                              value="#{pl01_crear_planilla.var_Tipoplanilla}"
                                                               requiredMessage="Escoja el tipo de planilla de pago">
                                                 <f:selectItem itemLabel="Seleccione un tipo de planilla" itemValue="0"  />
-                                                <f:selectItems value="#{planillacrearBean.listarTipoPlanilla}" 
+                                                <f:selectItems value="#{pl01_crear_planilla.listarTipoPlanilla}" 
                                                                var="p" itemLabel="#{p.Desc}" 
                                                                itemValue="#{p}"/>
                                             </p:selectOneMenu>
@@ -58,11 +58,11 @@
                                             <p:selectOneMenu  id="cboctabco" 
                                                               style="width: 180px"
                                                               dynamic="true"
-                                                              value="#{planillacrearBean.var_cod_cta_bco}"
+                                                              value="#{pl01_crear_planilla.var_cod_cta_bco}"
                                                               required="true"
                                                               requiredMessage="La Cta. Bancaria es obligatoria">
                                                 <f:selectItem itemLabel="Favor seleccione" itemValue="" noSelectionOption="true"/>
-                                                <f:selectItems value="#{planillacrearBean.listarCuentaBancaria}" 
+                                                <f:selectItems value="#{pl01_crear_planilla.listarCuentaBancaria}" 
                                                                var="p" 
                                                                itemLabel="#{p.NroCtaBco}" 
                                                                itemValue="#{p}"/>
@@ -74,17 +74,17 @@
                                             <p:selectOneMenu  id="cbotipomoneda" 
                                                               required="true"
                                                               style="width: 180px"
-                                                              value="#{planillacrearBean.var_cod_moneda}"
+                                                              value="#{pl01_crear_planilla.var_cod_moneda}"
                                                               requiredMessage="El tipo de moneda es obligatorio">
                                                 <f:selectItem itemLabel="Favor seleccione" itemValue="0"  />
-                                                <f:selectItems value="#{planillacrearBean.listarTipoMoneda}" 
+                                                <f:selectItems value="#{pl01_crear_planilla.listarTipoMoneda}" 
                                                                var="p" itemLabel="#{p.Descripcion}" 
                                                                itemValue="#{p}"/>
                                                 <f:ajax execute="cbotipomoneda"/>
                                             </p:selectOneMenu>
 
                                             <h:outputLabel value="Factor cambiario: "/>
-                                            <p:inputNumber value="#{planillacrearBean.var_factor_cambio}"
+                                            <p:inputNumber value="#{pl01_crear_planilla.var_factor_cambio}"
                                                            placeholder="Ingrese la divisa"
                                                            size="18" 
                                                            thousandSeparator="," decimalSeparator="." minValue="0"
@@ -99,23 +99,23 @@
                                     <p-panel header="Inf. Usuario">
                                         <h:panelGrid id="resumen1" columns="2">
                                             <h:outputLabel value="Importe Bruto de Pago: "/>
-                                            <h:outputLabel value="#{planillacrearBean.var_tot_bruto}">
+                                            <h:outputLabel value="#{pl01_crear_planilla.var_tot_bruto}">
                                                 <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/> 
                                             </h:outputLabel>
                                             <h:outputLabel value="Importe Bruto Debitos: "/>
-                                            <h:outputLabel value="#{planillacrearBean.var_tot_debitos}">
+                                            <h:outputLabel value="#{pl01_crear_planilla.var_tot_debitos}">
                                                 <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/> 
                                             </h:outputLabel>
                                             <h:outputLabel value="Importe Bruto Credito: "/>
-                                            <h:outputLabel value="#{planillacrearBean.var_tot_credito}">
+                                            <h:outputLabel value="#{pl01_crear_planilla.var_tot_credito}">
                                                 <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/> 
                                             </h:outputLabel>
                                             <h:outputLabel value="Total neto a reservar: "/>
-                                            <h:outputLabel value="#{planillacrearBean.var_tot_neto}">
+                                            <h:outputLabel value="#{pl01_crear_planilla.var_tot_neto}">
                                                 <f:convertNumber  pattern="###,###,###.##" minFractionDigits="2"/> 
                                             </h:outputLabel>
                                             <h:outputLabel value="Conteo de Pagos: "/>
-                                            <h:outputLabel value="#{planillacrearBean.var_nro_pagos}">
+                                            <h:outputLabel value="#{pl01_crear_planilla.var_nro_pagos}">
                                                 <f:convertNumber  pattern="###,###,###.##"/> 
                                             </h:outputLabel>
                                         </h:panelGrid>
@@ -129,13 +129,13 @@
                         <p:commandButton value="Cargar" 
                                          class="ui green button"
                                          icon="fa fa-fw fa-list"
-                                         action="#{planillacrearBean.cargarEmpleados}"
+                                         action="#{pl01_crear_planilla.cargarEmpleados}"
                                          style="width: 33%; height: 50px"
                                          update="dtempleados">
                         </p:commandButton>
                         <p:commandButton value="Guardar" 
                                          class="ui red button"
-                                         action="#{planillacrearBean.cmdguardar}"
+                                         action="#{pl01_crear_planilla.cmdguardar}"
                                          style="width: 33%; height: 50px"
                                          icon="fa fa-fw fa-save"
                                          update="dtempleados">
@@ -143,7 +143,7 @@
                         <p:commandButton value="Cancelar"
                                          class="ui blue button"
                                          icon="fa fa-trash"
-                                         action="#{planillacrearBean.nuevoDetalledePago}"
+                                         action="#{pl01_crear_planilla.nuevoDetalledePago}"
                                          style="width: 32%; height: 50px"
                                          update="dtempleados">
                         </p:commandButton>
@@ -151,9 +151,9 @@
 
                         <p:dataTable id="dtempleados" 
                                      var="pl" 
-                                     value="#{planillacrearBean.lstEmpleados}" 
+                                     value="#{pl01_crear_planilla.lstEmpleados}" 
                                      paginator="true" 
-                                     selection="#{planillacrearBean.selectedFilas}"
+                                     selection="#{pl01_crear_planilla.selectedFilas}"
                                      rowKey="#{pl.id_emp}"
                                      rows = "8" 
                                      style="margin-top: 5px; width: 100%; font-size: 14px;"
@@ -168,9 +168,9 @@
                                       style="width:16px;text-align:center">
                             </p:column> 
 
-                            <p:ajax event="rowSelectCheckbox" listener="#{planillacrearBean.onRowSelect}" update=":reporte:encabezado"/>
-                            <p:ajax event="rowUnselectCheckbox" listener="#{planillacrearBean.onRowUnselect}" update=":reporte:encabezado"/>
-                            <p:ajax event="toggleSelect" listener="#{planillacrearBean.toggleSelected}" update=":reporte:resumen1"/>
+                            <p:ajax event="rowSelectCheckbox" listener="#{pl01_crear_planilla.onRowSelect}" update=":reporte:encabezado"/>
+                            <p:ajax event="rowUnselectCheckbox" listener="#{pl01_crear_planilla.onRowUnselect}" update=":reporte:encabezado"/>
+                            <p:ajax event="toggleSelect" listener="#{pl01_crear_planilla.toggleSelected}" update=":reporte:resumen1"/>
 
                             <p:column headerText="Cod. Empleado" style="width: 10%;  font-family:  serif; font-size: 12px">
                                 <h:outputText value="#{pl.codEmp}" class="pull-right"/>
@@ -200,7 +200,7 @@
                             </p:column>
                             <f:facet name="footer">
                                 <p:commandButton id="cmdguardar"
-                                                 action="#{planillacrearBean.cmdguardar}"
+                                                 action="#{pl01_crear_planilla.cmdguardar}"
                                                  value="Guardar"/>
                             </f:facet>
 

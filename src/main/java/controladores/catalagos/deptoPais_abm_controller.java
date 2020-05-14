@@ -44,6 +44,7 @@ public class deptoPais_abm_controller implements java.io.Serializable {
 
     private TdeptoPais depto;
     private Tpais paises ;
+   
     private String item_pais;
     private String item_depto;
    

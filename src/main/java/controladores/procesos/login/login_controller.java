@@ -57,6 +57,8 @@ public class login_controller implements Serializable
     {
         
 //        RequestContext context = RequestContext.getCurrentInstance();
+        
+        
       PrimeRequestContext context = PrimeRequestContext.getCurrentInstance();
         
         FacesMessage message = null;
