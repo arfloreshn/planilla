@@ -27,28 +27,35 @@ public class validaAccesoUrl implements PhaseListener {
     /**
      * Creates a new instance of escuchaListener
      */
+    
+    private FacesContext contex = FacesContext.getCurrentInstance();
+        
     public validaAccesoUrl() {
     }
 
     @Override
-    public void afterPhase(PhaseEvent pe) {
+    public void afterPhase(PhaseEvent event) {
        
         String page403 = PathInicio() + PathApp() +"errorPages/page403.html";
        
-        FacesContext fc = pe.getFacesContext();
+        FacesContext context = event.getFacesContext();
        // Capturo la pagina actual
-       String paginaActiva = fc.getViewRoot().getViewId();
+       String paginaActual = context.getViewRoot().getViewId();
        
-       boolean snLoginFrm = paginaActiva.lastIndexOf("login.xhtml") > -1;
+       //boolean snLoginFrm = paginaActual.lastIndexOf("login.xhtml") > -1;
        
-       HttpSession session = (HttpSession) fc.getExternalContext().getSession(true);
+       boolean snLoginFrm = paginaActual.endsWith("login.xhtml");
+       HttpSession session = (HttpSession) context.getExternalContext().getSession(true);
        
-       Object usuario = session.getAttribute("usuario");
+       //El valor autenticado viene del loginControler
+       Object snAutenticado = session.getAttribute("snLogueado");
        
-       if (!snLoginFrm && usuario == null) 
+       // Si es verdadero va entrar a validarpasado por el login
+       if (!snLoginFrm && snAutenticado == null  ) 
        {
-          NavigationHandler nHandler = fc.getApplication().getNavigationHandler();
-          nHandler.handleNavigation(fc, null, page403);
+            NavigationHandler nHandler = context.getApplication().getNavigationHandler();
+                nHandler.handleNavigation(context, null, page403);
+           
        }
        
     }

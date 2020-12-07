@@ -24,7 +24,7 @@ public class planRedTmpWkfDataModel extends ListDataModel<planResTmpWkf> impleme
         List<planResTmpWkf> obj = (List<planResTmpWkf>) getWrappedData();
 
         for(planResTmpWkf pla : obj) {
-            if(pla.getCodEmp().equals(rowKey))
+            if(pla.getCodEmp() == rowKey)
                 return pla;
         }
         return null;

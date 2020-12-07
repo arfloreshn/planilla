@@ -15,44 +15,45 @@ import javax.servlet.http.HttpSession;
  * @author AllanRamiro
  */
 public class msgbox {
-    
-        public static HttpSession getSession() {
+
+    public static HttpSession getSession() {
         FacesContext fc = FacesContext.getCurrentInstance();
-        return (HttpSession)fc.getExternalContext().getSession(false);
+        return (HttpSession) fc.getExternalContext().getSession(false);
     }
-    
+
     public static HttpServletRequest getRequest() {
         FacesContext fc = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest)fc.getExternalContext().getRequest();
+        HttpServletRequest request = (HttpServletRequest) fc.getExternalContext().getRequest();
         return request;
     }
-    
+
     public static FacesContext getFC() {
         return FacesContext.getCurrentInstance();
     }
 
-    
     public static void vbInfo(String msg) {
-        
+        FacesContext fc = FacesContext.getCurrentInstance();
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
-        FacesContext.getCurrentInstance().addMessage(msg, message);
-            
-        }
+        fc.getCurrentInstance().addMessage(msg, message);
+
+    }
 
     public static void vbPrecaucion(String msg) {
+        FacesContext fc = FacesContext.getCurrentInstance();
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, msg, null);
-        FacesContext.getCurrentInstance().addMessage(msg, message);
+        fc.getCurrentInstance().addMessage(msg, message);
     }
-    
-     public static void vbError(String msg) {
+
+    public static void vbError(String msg) {
+        FacesContext fc = FacesContext.getCurrentInstance();
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, null);
-        FacesContext.getCurrentInstance().addMessage(msg, message);
+        fc.getCurrentInstance().addMessage(msg, message);
     }
-   
-     
-      public static void vbFatal(String msg) {
+
+    public static void vbFatal(String msg) {
+        FacesContext fc = FacesContext.getCurrentInstance();
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, msg, null);
-        FacesContext.getCurrentInstance().addMessage(msg, message);
+        fc.getCurrentInstance().addMessage(msg, message);
     }
-    
+
 }

@@ -10,6 +10,16 @@
     </context-param>
 
     <context-param>
+        <param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>com.sun.faces.NUMBER_OF_LOGICAL_VIEWS_IN_SESSION</param-name>
+        <param-value>50</param-value>
+    </context-param>
+
+    <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
@@ -18,7 +28,8 @@
         <param-name>javax.faces.CONFIG_FILES</param-name>
         <param-value>/WEB-INF/faces-config.xml</param-value>
     </context-param>
-    
+
+            
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -39,15 +50,15 @@
         <param-value>true</param-value>
     </context-param>
 
-   <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-         <url-pattern>/faces/*</url-pattern>
+        <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
    
   
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-         <url-pattern>*.xhtml</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>   
 
      
@@ -63,13 +74,18 @@
     </error-page>
     <error-page>
         <error-code>404</error-code>
-         <location>/page404.xhtml</location> 
+        <location>/page404.xhtml</location> 
     </error-page>
     <error-page>
         <error-code>500</error-code>
-         <location>/page500.xhtml</location> 
+        <location>/page500.xhtml</location> 
     </error-page>
-        
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/pageTiempo.xhtml</location>
+    </error-page>
+ 
+               
     <welcome-file-list>
         <!--<welcome-file>login.xhtml</welcome-file>-->
         <welcome-file>login.xhtml</welcome-file>

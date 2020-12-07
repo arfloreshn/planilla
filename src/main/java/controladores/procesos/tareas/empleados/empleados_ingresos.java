@@ -112,7 +112,7 @@ public class empleados_ingresos implements Serializable {
         return codEmpleado;
     }
 
-    public void setCodEmpleado(String codEmpleado) {
+    public void setCodEmpleado(String  codEmpleado) {
         this.codEmpleado = codEmpleado;
     }
 
@@ -181,7 +181,7 @@ public class empleados_ingresos implements Serializable {
     
     public void buscarEmpleado() {
 
-        if (this.codEmpleado == null && this.codEmpleado.length() <= 0) {
+        if (this.codEmpleado == null) {
             return;
         }
 
@@ -214,7 +214,7 @@ public class empleados_ingresos implements Serializable {
 
         this.tipo = new ttipoMovimientoDaoImpl();
         mListaOrigen = this.tipo.lstTipoMovimiento();
-        if (this.codEmpleado != null && this.codEmpleado.length() > 0) {
+        if (this.codEmpleado != null) {
             mListaOrigen = this.tipo.lstMovimientodeIngresos(this.id_empleado);
         }
 

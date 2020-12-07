@@ -8,39 +8,41 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="empCtaBco" class="modelo.EmpCtaBco" fetch="select">
-            <column name="id_cta_bco" />
-        </many-to-one>
-        <many-to-one name="tcargo" class="modelo.Tcargo" lazy="false" fetch="select">
+        <many-to-one name="tcargo" class="modelo.Tcargo"  fetch="select">
             <column name="id_cargo" not-null="true" />
         </many-to-one>
-        <many-to-one name="tdeptoEmp" class="modelo.TdeptoEmp" lazy="false" fetch="select">
+        <many-to-one name="tdeptoEmp" class="modelo.TdeptoEmp"  fetch="select">
             <column name="id_depto_emp" not-null="true" />
         </many-to-one>
-        <many-to-one name="tdeptoPais" class="modelo.TdeptoPais" lazy="false" fetch="select">
+        <many-to-one name="tdeptoPais" class="modelo.TdeptoPais" fetch="select">
             <column name="id_depto_pais" not-null="true" />
         </many-to-one>
-        <many-to-one name="testadoCivil" class="modelo.TestadoCivil" lazy="false" fetch="select">
+        <many-to-one name="testadoCivil" class="modelo.TestadoCivil" fetch="select">
             <column name="id_estado_civil" not-null="true" />
         </many-to-one>
-        <many-to-one name="tmunicipios" class="modelo.Tmunicipios" lazy="false" fetch="select">
+        <many-to-one name="tmunicipios" class="modelo.Tmunicipios"  fetch="select">
             <column name="id_municipio" not-null="true" />
         </many-to-one>
-        <many-to-one name="tpais" class="modelo.Tpais" lazy="false" fetch="select">
+        <many-to-one name="tpais" class="modelo.Tpais"  fetch="select">
             <column name="id_pais" not-null="true" />
         </many-to-one>
-        <many-to-one name="tprofesion" class="modelo.Tprofesion" lazy="false" fetch="select">
+        <many-to-one name="tprofesion" class="modelo.Tprofesion"  fetch="select">
             <column name="id_profesion" not-null="true" />
         </many-to-one>
-        <many-to-one name="ttipoDocumento" class="modelo.TtipoDocumento" lazy="false" fetch="select">
+        <many-to-one name="ttipoDocumento" class="modelo.TtipoDocumento" fetch="select">
             <column name="id_tipo_doc" not-null="true" />
         </many-to-one>
-        <many-to-one name="ttipoEmpleado" class="modelo.TtipoEmpleado" lazy="false" fetch="select">
+        <many-to-one name="ttipoEmpleado" class="modelo.TtipoEmpleado"  fetch="select">
             <column name="id_tipo_empleado" not-null="true" />
         </many-to-one>
+    <many-to-one name="empCtaBco" class="modelo.EmpCtaBco" fetch="select">
+            <column name="id_cta_bco" not-null="true" />
+        </many-to-one>    
+
         <property name="codEmpleado" type="string">
-            <column name="cod_empleado" length="20" not-null="true" />
+            <column name="cod_empleado"  not-null="true" />
         </property>
+
         <property name="primerApellido" type="string">
             <column name="primer_apellido" length="50" not-null="true" />
         </property>

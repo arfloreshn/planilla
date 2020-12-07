@@ -30,7 +30,6 @@ import modelo.Tpais;
 import modelo.Tprofesion;
 import modelo.TtipoDocumento;
 import modelo.TtipoEmpleado;
-import utilerias.funciones.funciones;
 import utilerias.hibernate.uh;
 import utilerias.funciones.msgbox;
 
@@ -66,8 +65,7 @@ import utilerias.System.clsSistema;
 @ViewScoped
 public class empleados_controller implements Serializable {
 
-    
-   private static final long serialVersionUID = 1L;   
+    private static final long serialVersionUID = 1L;
 
     private EmpMae empleados;
     private List<EmpMae> lstEmpleados;
@@ -138,9 +136,7 @@ public class empleados_controller implements Serializable {
         this.idpais = "";
         this.iddepto = "";
         this.sn_nuevo = false;
-       
-        
-    }
+   }
 
     public String getSexo() {
         return Sexo;
@@ -243,11 +239,11 @@ public class empleados_controller implements Serializable {
             // los valores deben ser del mismo tipo de la expresión
             case "N":
                 GuardarRegistro();
-                ;
+                break;
             case "U":
 
                 ModificarRegistro();
-                ;
+                break;
             default:
             // Declaraciones
         }
@@ -329,30 +325,36 @@ public class empleados_controller implements Serializable {
     public void buscarEmpleado() {
 
         if (this.empleados.getCodEmpleado() == null && this.empleados.getCodEmpleado().length() <= 0) {
+            this.empleados = new EmpMae();
             return;
-        }
-
-        btnHabilitar();
-        this.TipoAccion = "U";
-
-        this.codEmpleado = this.empleados.getCodEmpleado();
-        this.empleados = this.emp.buscarEmpleadoXid(this.codEmpleado);
-
-        if (this.empleados == null) {
-            msgbox.vbPrecaucion("El codigo de empleado, no existe");
         } else {
 
-          
-            if (String.valueOf(this.empleados.getSexo()).equals("F")) {
-                this.Sexo = "F";
+            btnHabilitar();
+            this.TipoAccion = "U";
+
+            this.codEmpleado = this.empleados.getCodEmpleado();
+            this.empleados = this.emp.buscarEmpleadoXid(this.codEmpleado);
+
+            if (this.empleados == null) {
+                msgbox.vbPrecaucion("El codigo de empleado, no existe");
+                 this.empleados = new EmpMae();
+                 nuevoregistro();
+                 return;
             } else {
-                this.Sexo = "M";
+
+                if (String.valueOf(this.empleados.getSexo()).equals('F')) {
+                    this.Sexo = "F";
+                } else {
+                    this.Sexo = "M";
+                }
+
+                this.idpais = this.empleados.getTpais().getId().toString();
+                this.id_municipio = this.empleados.getTmunicipios().getId();
+                this.id_deptopais = this.empleados.getTdeptoPais().getId();
+
+                ObtenerImagen();
             }
 
-             this.id_municipio = this.empleados.getTmunicipios().getId();
-            this.id_deptopais = this.empleados.getTdeptoPais().getId();
-      
-            ObtenerImagen();
         }
 
     }
@@ -408,8 +410,6 @@ public class empleados_controller implements Serializable {
         return ListaTipoDocumento;
     }
 
-
-    
     /*
      DEVUELVE EL CBO DE CARGO DEL EMPLEADO
      */
@@ -506,7 +506,7 @@ public class empleados_controller implements Serializable {
             idpais = String.valueOf(this.empleados.getTpais().getId());
             iddepto = String.valueOf(this.id_deptopais);
             this.empleados.getTdeptoPais().setId(this.id_deptopais);
-            
+
         }
 
         this.ListaMunicipios = new ArrayList<SelectItem>();
@@ -595,8 +595,8 @@ public class empleados_controller implements Serializable {
                 this.foto = event.getFile().getFileName();
                 copyFile(this.foto, event.getFile().getInputstream());
                 this.foto = event.getFile().getFileName();
-                
-               //ObtenerImagen();
+
+                //ObtenerImagen();
             } catch (IOException ex) {
                 Logger.getLogger(empleados_controller.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -651,16 +651,14 @@ public class empleados_controller implements Serializable {
             //obj = this.emp.getFoto(this.codEmpleado);
 
             // AQUI ES DONDE, VOY A GUARDAR LA 
-            
             FacesContext facesContext = FacesContext.getCurrentInstance();
 
             // Se instancia servlet para determinar la ruta real de la Aplicacion
             ServletContext PathApp = (ServletContext) facesContext.getExternalContext().getContext();
-            
+
             String NameFile = this.codEmpleado + ".jpg";
             this.pathImagen = (String) PathApp.getRealPath(PathImg());
-            this.destination =  this.pathImagen +  "\\" + NameFile ;
-            
+            this.destination = this.pathImagen + "\\" + NameFile;
 
             File fichero = new File(this.destination);
             if (fichero.exists()) {
@@ -687,115 +685,105 @@ public class empleados_controller implements Serializable {
 
     public void oncboEstadoCivil(ValueChangeEvent e) {
 
-        this.empleados.getTestadoCivil().setId(Integer.valueOf(e.getOldValue().toString().trim()));
-        if (e.getOldValue() != null && e.getNewValue() != null) {
-            if (e.getNewValue() != e.getOldValue()) {
-                Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
-                this.empleados.getTestadoCivil().setId(itemSelect);
-            }
+        this.empleados.getTestadoCivil().setId(Integer.valueOf(e.getNewValue().toString().trim()));
+        if (e.getNewValue() != e.getOldValue()) {
+            Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
+            this.empleados.getTestadoCivil().setId(itemSelect);
+
         }
 
     }
 
     public void oncboProfesion(ValueChangeEvent e) {
 
-        this.empleados.getTprofesion().setId(Integer.valueOf(e.getOldValue().toString().trim()));
-        if (e.getOldValue() != null && e.getNewValue() != null) {
-            if (e.getNewValue() != e.getOldValue()) {
-                Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
-                this.empleados.getTprofesion().setId(itemSelect);
-            }
+        this.empleados.getTprofesion().setId(Integer.valueOf(e.getNewValue().toString().trim()));
+
+        if (e.getNewValue() != e.getOldValue()) {
+            Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
+            this.empleados.getTprofesion().setId(itemSelect);
+
         }
 
     }
 
     public void oncboCargo(ValueChangeEvent e) {
 
-        this.empleados.getTcargo().setId(Integer.valueOf(e.getOldValue().toString().trim()));
+        this.empleados.getTcargo().setId(Integer.valueOf(e.getNewValue().toString().trim()));
 
-        if (e.getOldValue() != null && e.getNewValue() != null) {
-            if (e.getNewValue() != e.getOldValue()) {
-                Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
-                this.empleados.getTcargo().setId(itemSelect);
-            }
+        if (e.getNewValue() != e.getOldValue()) {
+            Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
+            this.empleados.getTcargo().setId(itemSelect);
         }
 
     }
 
     public void oncboPais(ValueChangeEvent e) {
-        this.idpais = e.getOldValue().toString().trim();
-        this.empleados.getTpais().setId(Integer.valueOf(e.getOldValue().toString().trim()));
+        this.idpais = e.getNewValue().toString().trim();
+        this.empleados.getTpais().setId(Integer.valueOf(e.getNewValue().toString().trim()));
 
-        if (e.getOldValue() != null && e.getNewValue() != null) {
-            if (e.getNewValue() != e.getOldValue()) {
-                Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
-                this.idpais = itemSelect.toString().trim();
-            }
+        if (e.getNewValue() != e.getOldValue()) {
+            Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
+            this.idpais = itemSelect.toString().trim();
         }
+
     }
 
     public void oncboDeptoPais(ValueChangeEvent e) {
-        this.iddepto = e.getOldValue().toString().trim();
+        this.iddepto = e.getNewValue().toString().trim();
         this.empleados.getTdeptoPais().setId(Integer.valueOf(this.iddepto));
 
-        if (e.getOldValue() != null && e.getNewValue() != null) {
-            if (e.getNewValue() != e.getOldValue()) {
-                Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
-                this.empleados.getTdeptoPais().setId(itemSelect);
-                this.iddepto = itemSelect.toString().trim();
-                getListaMunicipios();
+        if (e.getNewValue() != e.getOldValue()) {
+            Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
+            this.empleados.getTdeptoPais().setId(itemSelect);
+            this.iddepto = itemSelect.toString().trim();
+            getListaMunicipios();
 
-            }
         }
     }
 
     public void oncboMunicipio(ValueChangeEvent e) {
-        this.empleados.getTmunicipios().setId(Integer.valueOf(e.getOldValue().toString().trim()));
+        this.id_municipio = Integer.valueOf(e.getNewValue().toString());
+        this.empleados.getTmunicipios().setId(Integer.valueOf(e.getNewValue().toString().trim()));
 
-        if (e.getOldValue() != null && e.getNewValue() != null) {
-            if (e.getNewValue() != e.getOldValue()) {
-                Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
-                this.empleados.getTmunicipios().setId(itemSelect);
-            }
+        if (e.getNewValue() != e.getOldValue()) {
+            Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
+            this.empleados.getTmunicipios().setId(itemSelect);
         }
+
     }
 
     public void oncboDeptoEmp(ValueChangeEvent e) {
-        this.empleados.getTdeptoEmp().setId(Integer.valueOf(e.getOldValue().toString().trim()));
+        this.empleados.getTdeptoEmp().setId(Integer.valueOf(e.getNewValue().toString().trim()));
 
-        if (e.getOldValue() != null && e.getNewValue() != null) {
-            if (e.getNewValue() != e.getOldValue()) {
-                Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
-                this.empleados.getTdeptoEmp().setId(itemSelect);
-            }
+        if (e.getNewValue() != e.getOldValue()) {
+            Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
+            this.empleados.getTdeptoEmp().setId(itemSelect);
+
         }
     }
 
     public void oncboTipoEmpleado(ValueChangeEvent e) {
-        this.empleados.getTtipoEmpleado().setId(Integer.valueOf(e.getOldValue().toString().trim()));
+        this.empleados.getTtipoEmpleado().setId(Integer.valueOf(e.getNewValue().toString().trim()));
 
-        if (e.getOldValue() != null && e.getNewValue() != null) {
-            if (e.getNewValue() != e.getOldValue()) {
-                Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
-                this.empleados.getTtipoEmpleado().setId(itemSelect);
-            }
+        if (e.getNewValue() != e.getOldValue()) {
+            Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
+            this.empleados.getTtipoEmpleado().setId(itemSelect);
         }
+
     }
 
     public void oncboTipoDocumentoEmpleado(ValueChangeEvent e) {
-        this.empleados.getTtipoDocumento().setId(Integer.valueOf(e.getOldValue().toString().trim()));
+        this.empleados.getTtipoDocumento().setId(Integer.valueOf(e.getNewValue().toString().trim()));
 
-        if (e.getOldValue() != null && e.getNewValue() != null) {
-            if (e.getNewValue() != e.getOldValue()) {
-                Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
-                this.empleados.getTtipoDocumento().setId(itemSelect);
-            }
+        if (e.getNewValue() != e.getOldValue()) {
+            Integer itemSelect = Integer.valueOf(e.getNewValue().toString());
+            this.empleados.getTtipoDocumento().setId(itemSelect);
+
         }
     }
 
-    
-      public void handleFileUpload(FileUploadEvent event) {
+    public void handleFileUpload(FileUploadEvent event) {
         //FacesMessage msg = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
-         msgbox.vbInfo("Fotografía almacenada correctamente");
+        msgbox.vbInfo("Fotografía almacenada correctamente");
     }
 }

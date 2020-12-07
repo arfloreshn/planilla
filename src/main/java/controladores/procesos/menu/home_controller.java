@@ -5,83 +5,66 @@ package controladores.procesos.menu;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import javax.inject.Named;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import modelo.Usuario;
 import utilerias.funciones.funciones;
-import static utilerias.funciones.funciones.PathApp;
-import static utilerias.funciones.funciones.PathInicio;
 
 /**
  *
  * @author root
  */
 @Named(value = "homeBean")
-@ApplicationScoped
+@SessionScoped
 public class home_controller implements java.io.Serializable {
 
-    
+    private String homePath;
+
     FacesContext contex = FacesContext.getCurrentInstance();
-    
+  
+           
+    private String var_usuario = ""; 
     /**
      * Creates a new instance of homeBean
      */
     public home_controller() {
-         //verificarSesion();
-         getHomeUrl();
+       
+        getHomeUrl();
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        this.var_usuario = context.getSessionMap().get("usuario").toString();
+        
     }
-    
-    public final String getHomeUrl()
-    {
-     return funciones.PathInicio();
+
+    public final String getHomeUrl() {
+        return funciones.PathInicio();
     }
-    
-    
-    public String getForms()
-    {
+
+    public String getForms() {
         String path = funciones.PathApp();
         return path;
     }
-   
-    
-    public void verificarSesion()
-    {
-      try
-      {
-       this.contex =  FacesContext.getCurrentInstance();
-       Usuario us = (Usuario) this.contex.getExternalContext().getSessionMap().get("usuario");
-      
-      if(us==null)
-      {
-        String path = PathInicio() + PathApp() +"errorPages/page403.html";
-        this.contex.getExternalContext().redirect(path);
-        this.contex.renderResponse();
-      }
-      
-      } 
-      catch(Exception e)
-      {
-      
-      }
-      
-    }
-    
 
-     
-    public String mostrarusuario() 
-    {
-         String usuario = (String) this.contex.getExternalContext().getSessionMap().get("usuario").toString();
-         return usuario;
+    public String getVar_usuario() {
+        return var_usuario;
     }
-    
-   
-    public void cerrarSesion()
-    {
-      this.contex.getExternalContext().invalidateSession();
+
+
+    public String getHomePath() {
+        return homePath;
     }
-    
- 
+
+    public void setHomePath(String homePath) {
+        this.homePath = homePath;
+    }
+
+    public String mostrarusuario() {
+        String usuario = (String) this.contex.getExternalContext().getSessionMap().get("usuario").toString();
+        return usuario;
+    }
+
+    public void cerrarSesion() {
+        this.contex.getExternalContext().invalidateSession();
+    }
+
 }

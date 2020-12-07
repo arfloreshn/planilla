@@ -5,16 +5,18 @@ package controladores.procesos.menu;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import dao.interfaz.menu.menuDao;
 import dao.implementar.menu.menuDaoImpl;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.NavigationHandler;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import modelo.Menu;
 import modelo.Usuario;
 
@@ -43,43 +45,43 @@ public class menu_dinamico_controller implements Serializable {
     private boolean rsp;
 
     private FacesContext contex = FacesContext.getCurrentInstance();
-   
-    public menu_dinamico_controller() {
-
-        this.verificarSesion();
-        model = new DefaultMenuModel();
-    }
-
+    private String var_usuario = "";
+    
     @PostConstruct
     public void init() {
-        this.verificarSesion();
-        this.Iniciarmenu();
-        this.crearMenu();
+        rsp = this.contex.isPostback();
+        if (!rsp) {
+
+            this.verificarSesion();
+            this.Iniciarmenu();
+            this.crearMenu();
+        }
     }
 
-    
-    public void verificarSesion()
-    {
-      try
-      {
-       this.contex =  FacesContext.getCurrentInstance();
-       Usuario us = (Usuario) this.contex.getExternalContext().getSessionMap().get("usuario");
-      
-      if(us==null)
-      {
-          String path = PathInicio()+"/page403.xhtml";
-          this.contex.getExternalContext().redirect(path);
-      }
-      
-      } 
-      catch(Exception e)
-      {
-        e.getMessage();
-      }
-      
+    public menu_dinamico_controller() {
+        model = new DefaultMenuModel();
+
     }
-    
-    
+
+    public void verificarSesion() {
+        try {
+
+            ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
+            this.var_usuario = extContext.getSessionMap().get("usuario").toString();
+       
+            // Si es verdadero va entrar a validarpasado por el login
+            if (this.var_usuario == null) {
+                String path = PathInicio() + "/page403.xhtml";
+                this.contex.getExternalContext().redirect(path);
+
+            }
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+    }
+
     public void Iniciarmenu() {
         // Aqui llenamos o cargamos nuestra tabla de menu 
         try {
@@ -125,7 +127,6 @@ public class menu_dinamico_controller implements Serializable {
             // Por cada loop construimos el menu y los submenus de nivel 1, 2 y 3
             for (int i = 0; i < 1; i++) {
 
-                
                 // Contrullendo el nivel 1 o Menus Contextuales
                 for (Menu m1 : lstmenu) {
 
@@ -147,24 +148,24 @@ public class menu_dinamico_controller implements Serializable {
 
                         // Agregamos el  nivel 2 o Submenu 
                         for (Menu s1 : lstmenu) {
-                            
+
                             // Verifico si el submenu que voy a construir sea hijo del mismo papa
                             if (s1.getIdMenu().intValue() == n
                                     && s1.getTipoItem().toString().contains("S")
                                     && s1.getIdNivel().intValue() == idMenu) {
-                                
-                                    //optengo el id del submenu, ese sera ahora el papa de los items
-                                    idSubMenu = s1.getIdItem();
-                                    
-                                    if (s1.getNombre().isEmpty() || s1.getNombre().length() <= 0) {
-                                        separar = new DefaultSeparator();
-                                         mMnu.addElement(separar);
-                                    } else {
-                                         mSubMnu = new DefaultSubMenu(s1.getNombre().toString());
-                                        //mSubMnu.setStyle("width:  240px");
-                                         mMnu.addElement(mSubMnu);
 
-                                      }
+                                //optengo el id del submenu, ese sera ahora el papa de los items
+                                idSubMenu = s1.getIdItem();
+
+                                if (s1.getNombre().isEmpty() || s1.getNombre().length() <= 0) {
+                                    separar = new DefaultSeparator();
+                                    mMnu.addElement(separar);
+                                } else {
+                                    mSubMnu = new DefaultSubMenu(s1.getNombre().toString());
+                                    //mSubMnu.setStyle("width:  240px");
+                                    mMnu.addElement(mSubMnu);
+
+                                }
 
                                 for (Menu t1 : lstmenu) {
                                     if (t1.getIdMenu().intValue() == n
@@ -191,20 +192,18 @@ public class menu_dinamico_controller implements Serializable {
 
                         } // Fin de Submenu s1
 
-                        
-                       // Agregamos el  Submenu 
-
+                        // Agregamos el  Submenu 
                         for (Menu s2 : lstmenu) {
                             if (s2.getIdMenu().intValue() == n
                                     && s2.getTipoItem().toString().contains("I")
                                     && s2.getIdNivel().intValue() == idMenu) {
-                                
+
                                 Frm = s2.getUrl();
                                 item = new DefaultMenuItem(s2.getNombre().toString());
                                 if (Frm.length() > 1) {
                                     item.setOutcome(pathForms + this.Frm);
                                 }
-                                mSubMnu.addElement(item); 
+                                mSubMnu.addElement(item);
                                 mMnu.addElement(item);
 
                             }

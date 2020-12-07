@@ -8,12 +8,10 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="tbanco" class="modelo.Tbanco" fetch="select">
-            <column name="id_bco" not-null="true" />
-        </many-to-one>
-        <many-to-one name="tmoneda" class="modelo.Tmoneda" fetch="select">
-            <column name="id_moneda" not-null="true" />
-        </many-to-one>
+       <property name="codEmpleado" type="string">
+            <column name="cod_empleado" length="20" not-null="true" />
+        </property>
+        
         <property name="nroCuenta" type="string">
             <column name="nro_cuenta" length="20" not-null="true" />
         </property>

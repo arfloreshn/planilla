@@ -20,7 +20,7 @@
         <property name="codMunicipio" type="string">
             <column name="cod_municipio" length="20" not-null="true" />
         </property>
-        <set name="empMaes" table="emp_mae" inverse="true" lazy="true" fetch="select">
+        <set name="empMaes" table="emp_mae" inverse="true"  fetch="select">
             <key>
                 <column name="id_municipio" not-null="true" />
             </key>

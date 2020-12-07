@@ -15,6 +15,7 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.PrimeRequestContext;
 import modelo.Usuario;
@@ -79,7 +80,11 @@ public class login_controller implements Serializable
             fc.getExternalContext().getSessionMap().put("usuario", this.user.getUsuario());
             message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido", this.user.getUsuario());
            
-           
+           HttpSession session = (HttpSession) fc.getExternalContext().getSession(true);
+          // User passes through the login page and clicks the "login" button.
+           session.setAttribute("snLogueado", true);
+           session.setAttribute("nickname", this.user.getUsuario());
+            
             path = PathInicio() + PathApp() + "Bienvenido.xhtml";
         } 
         else {

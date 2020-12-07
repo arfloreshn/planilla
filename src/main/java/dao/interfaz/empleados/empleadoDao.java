@@ -29,9 +29,9 @@ public interface empleadoDao {
    public List<TdeptoPais> listarDeptos(EmpMae obj);
    public List<Tmunicipios> listarMunicipios(EmpMae obj);
    public List<Tprofesion> lstProfesion();
-   public EmpMae buscarEmpleadoXid(String codEmpleado);
+   public EmpMae buscarEmpleadoXid(String  codEmpleado);
    public int getNroEmpleado() throws Exception;
-   public EmpMae getFoto(String codEmpleado);
+   public EmpMae getFoto(String  codEmpleado);
    public List<String> getAniversariosDelMes(int mes); 
    public List<EmpMae> getAniversariosXNombres(String nombre);
    public List<EmpMae> getEmpleadoIngresados(int anio, int mes);

@@ -16,8 +16,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <all-themes.version>1.0.10</all-themes.version>
-        <primefaces.version>7.0</primefaces.version>
+        <primefaces.version>8.0</primefaces.version>
         <javaee-api.version>8.0</javaee-api.version>
+        <all-themes.version>1.0.10</all-themes.version>
     </properties>
 
     <repositories>
@@ -29,10 +30,12 @@
         </repository>
     </repositories>
     <dependencies>
+  
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.44</version>
+            <version>5.1.17</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

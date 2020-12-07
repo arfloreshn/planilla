@@ -35,7 +35,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utilerias.hibernate.HibernateUtil;
 import utilerias.hibernate.uh;
-import utilerias.jodbc.dbConexcion;
+import static utilerias.jodbc.dbConexcion.getConnection;
 
 /**
  *
@@ -63,6 +63,7 @@ public class empleadoDaoImpl implements empleadoDao {
         Session session = null;
         Transaction tx = null;
 
+      
         String sql = "from EmpMae emp "
                 + "left join fetch emp.tpais pais "
                 + "left join fetch emp.tdeptoPais deppais"
@@ -71,8 +72,9 @@ public class empleadoDaoImpl implements empleadoDao {
                 + "left join fetch emp.tdeptoEmp depemp"
                 + "left join fetch emp.tprofesion prof"
                 + "left join fetch emp.testadoCivil testadociv"
-                + "left join fetch emp.ttipoDocumento tipodoc";
-
+                + "left join fetch emp.ttipoDocumento tipodoc"; 
+        
+                        
         try {
             session = uh.getSessionFactory().openSession();
 
@@ -175,14 +177,15 @@ public class empleadoDaoImpl implements empleadoDao {
      * @return
      * @throws Exception
      */
+    
     @Override
-    public EmpMae buscarEmpleadoXid(String codEmpleado) {
+    public EmpMae buscarEmpleadoXid(String  codEmpleado) {
         Session session = null;
         Transaction tx = null;
         EmpMae obj = new EmpMae();
         try {
             session = uh.getSessionFactory().openSession();
-            String sql = "FROM EmpMae WHERE codEmpleado='" + codEmpleado.trim()+ "'";
+            String sql = "FROM EmpMae WHERE codEmpleado='" + codEmpleado.trim() + "'" ;
             tx = session.beginTransaction();
             obj = (EmpMae) session.createQuery(sql).uniqueResult();
             tx.commit();
@@ -230,11 +233,14 @@ public class empleadoDaoImpl implements empleadoDao {
     @Override
     public int getNroEmpleado() throws Exception {
 
+        
+        
         int nro_empleado = 0;
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        conexion = DriverManager.getConnection("jdbc:mysql://192.168.0.19:3306/planilla", "root", "Denver$8");
+  
+       //Conexcion a JODBC Mysql    
+        conexion = getConnection();
+       
         String sSql = "";
-
         sSql = "SELECT fn_correlativo('empmae')";
         CallableStatement cs = conexion.prepareCall(sSql);
         ResultSet rs = cs.executeQuery();
@@ -252,7 +258,7 @@ public class empleadoDaoImpl implements empleadoDao {
 
         EmpMae obj = new EmpMae();
         try {
-            String sql = "FROM EmpMae WHERE codEmpleado='" + codEmpleado.trim()+ "'";
+            String sql = "FROM EmpMae WHERE codEmpleado='" + codEmpleado.trim() + "'";
             tx = session.beginTransaction();
             obj = (EmpMae) session.createQuery(sql).uniqueResult();
             tx.commit();

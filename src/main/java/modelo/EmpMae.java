@@ -20,7 +20,7 @@ public class EmpMae implements java.io.Serializable {
      private Tprofesion tprofesion;
      private TtipoDocumento ttipoDocumento;
      private TtipoEmpleado ttipoEmpleado;
-     private String codEmpleado;
+     private String  codEmpleado;
      private String primerApellido;
      private String segundoApellido;
      private String nombres;
@@ -59,10 +59,11 @@ public class EmpMae implements java.io.Serializable {
         this.ttipoDocumento = new TtipoDocumento();
         this.empCtaBco = new EmpCtaBco();
         this.sexo = ' ';
+        this.codEmpleado = "";
 
     }
 
-      public EmpMae(Tcargo tcargo, TdeptoEmp tdeptoEmp, TdeptoPais tdeptoPais, TestadoCivil testadoCivil, Tmunicipios tmunicipios, Tpais tpais, Tprofesion tprofesion, TtipoDocumento ttipoDocumento, TtipoEmpleado ttipoEmpleado, String codEmpleado, String primerApellido, String nombres, String nroIdentidad, Date fechaNac, char sexo, BigDecimal sueldoBruto, Date fecAlta, String creadoPor, String tel1, String correo1) {
+      public EmpMae(Tcargo tcargo, TdeptoEmp tdeptoEmp, TdeptoPais tdeptoPais, TestadoCivil testadoCivil, Tmunicipios tmunicipios, Tpais tpais, Tprofesion tprofesion, TtipoDocumento ttipoDocumento, TtipoEmpleado ttipoEmpleado, String  codEmpleado, String primerApellido, String nombres, String nroIdentidad, Date fechaNac, char sexo, BigDecimal sueldoBruto, Date fecAlta, String creadoPor, String tel1, String correo1) {
         this.tcargo = tcargo;
         this.tdeptoEmp = tdeptoEmp;
         this.tdeptoPais = tdeptoPais;
@@ -84,7 +85,7 @@ public class EmpMae implements java.io.Serializable {
         this.tel1 = tel1;
         this.correo1 = correo1;
     }
-    public EmpMae(EmpCtaBco empCtaBco, Tcargo tcargo, TdeptoEmp tdeptoEmp, TdeptoPais tdeptoPais, TestadoCivil testadoCivil, Tmunicipios tmunicipios, Tpais tpais, Tprofesion tprofesion, TtipoDocumento ttipoDocumento, TtipoEmpleado ttipoEmpleado, String codEmpleado, String primerApellido, String segundoApellido, String nombres, String nroIdentidad, Date fechaNac, String lugarNacimiento, char sexo, BigDecimal sueldoBruto, Date fecAlta, Date fecBaja, String creadoPor, String modificadoPor, Date fecModificado, byte[] foto, String tel1, String tel2, String correo1, String correo2) {
+    public EmpMae(EmpCtaBco empCtaBco, Tcargo tcargo, TdeptoEmp tdeptoEmp, TdeptoPais tdeptoPais, TestadoCivil testadoCivil, Tmunicipios tmunicipios, Tpais tpais, Tprofesion tprofesion, TtipoDocumento ttipoDocumento, TtipoEmpleado ttipoEmpleado, String  codEmpleado, String primerApellido, String segundoApellido, String nombres, String nroIdentidad, Date fechaNac, String lugarNacimiento, char sexo, BigDecimal sueldoBruto, Date fecAlta, Date fecBaja, String creadoPor, String modificadoPor, Date fecModificado, byte[] foto, String tel1, String tel2, String correo1, String correo2) {
        this.empCtaBco = empCtaBco;
        this.tcargo = tcargo;
        this.tdeptoEmp = tdeptoEmp;
@@ -193,6 +194,7 @@ public class EmpMae implements java.io.Serializable {
     public void setTtipoEmpleado(TtipoEmpleado ttipoEmpleado) {
         this.ttipoEmpleado = ttipoEmpleado;
     }
+    
     public String getCodEmpleado() {
         return this.codEmpleado;
     }

@@ -14,13 +14,13 @@
         <property name="nomDepto" type="string">
             <column name="nom_depto" length="50" not-null="true" />
         </property>
-        <set name="empMaes" table="emp_mae" inverse="true" lazy="true" fetch="select">
+        <set name="empMaes" table="emp_mae" inverse="true" fetch="select">
             <key>
                 <column name="id_depto_pais" not-null="true" />
             </key>
             <one-to-many class="modelo.EmpMae" />
         </set>
-        <set name="tmunicipioses" table="tmunicipios" inverse="true" lazy="true" fetch="select">
+        <set name="tmunicipioses" table="tmunicipios" inverse="true" fetch="select">
             <key>
                 <column name="id_depto_pais" not-null="true" />
             </key>

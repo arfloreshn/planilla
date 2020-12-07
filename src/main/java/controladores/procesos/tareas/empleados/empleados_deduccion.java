@@ -58,7 +58,7 @@ public class empleados_deduccion implements Serializable {
     private boolean sn_Existe;      // Validador de la Existencia o no de las deducciones en la tabla de deducciones
     
     // Variables de Tipo String
-    private String codEmpleado;     // Codigo de Trabajo para el usuario, este si se muestra al usuario 
+    private String  codEmpleado;     // Codigo de Trabajo para el usuario, este si se muestra al usuario 
     
     private List<EmpMae> lstEmpleados;  // Objeto de tipo lista, para desplegar la información del Empleado
     private List<TtipoMovimiento> Lstprodecencia; //Objeto de tipo lista, de las deducciones <NO> Aplicadas.
@@ -180,7 +180,7 @@ public class empleados_deduccion implements Serializable {
     
     public void buscarEmpleado() {
 
-        if (this.codEmpleado == null && this.codEmpleado.length() <= 0) {
+        if (this.codEmpleado == null) {
             return;
         }
 
@@ -213,7 +213,7 @@ public class empleados_deduccion implements Serializable {
 
         this.tipo = new ttipoMovimientoDaoImpl();
         mListaOrigen = this.tipo.lstTipoMovimiento();
-        if (this.codEmpleado != null && this.codEmpleado.length() > 0) {
+        if (this.codEmpleado !=  null) {
             mListaOrigen = this.tipo.lstTipoMovimintoXCodigoEmpleado(this.id_empleado);
         }
 

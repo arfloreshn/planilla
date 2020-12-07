@@ -24,7 +24,8 @@ public class dbConexcion {
     Connection con = null;
     try {
       Class.forName("com.mysql.jdbc.Driver");
-      con = DriverManager.getConnection("jdbc:mysql://192.168.0.19:3306/planilla?useSSL=false", "root", "Denver$8");
+      //probar comentario
+      con = DriverManager.getConnection("jdbc:mysql://192.168.2.100:3306/planilla", "root", "secret");
     } catch (SQLException ex) {
       Logger.getLogger(dbConexcion.class.getName()).log(Level.SEVERE, null, ex);
     } catch (ClassNotFoundException ex) {

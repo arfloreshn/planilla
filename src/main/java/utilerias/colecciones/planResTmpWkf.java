@@ -103,7 +103,7 @@ public class planResTmpWkf {
         this.id_emp = id_emp;
     }
 
-    public String getCodEmp() {
+    public String  getCodEmp() {
         return codEmp;
     }
 

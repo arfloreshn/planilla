@@ -12,15 +12,35 @@ services:
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: secret
-  #   networks:
-  #          mired:
-  #              ipv4_address: 192.168.99.120
+     networks:
+         - ingress
 
-   payara:
+   manager:
      image: payara/server-full:5.191
+     container_name: manager
      ports:
-        - "8088:8080"
-        - "4848:4848"
+        - "18080:8080"
+        - "14848:4848"
+     environment:
+        - ADMIN_USER=admin
+        - ADMIN_PASSWORD=secret    
+     depends_on:
+            - db
+     mem_limit: 2048m
+     mem_reservation: 100m
+     volumes:
+     - ./deployments:/opt/payara/deployments
+     networks:
+         - ingress
+         
+   worker1:
+     image: payara/server-full:5.191
+     container_name: worker1
+     mem_limit: 2048m
+     mem_reservation: 100m
+     ports:
+        - "28080:8080"
+        - "24848:4848"
      environment:
         - ADMIN_USER=admin
         - ADMIN_PASSWORD=secret    
@@ -28,15 +48,31 @@ services:
             - db
      volumes:
      - ./deployments:/opt/payara/deployments
-  #   networks:
-  #          mired:
-  #              ipv4_address: 192.168.99.120 
+     networks:
+         - ingress
+         
+   worker2:
+     image: payara/server-full:5.191
+     container_name: worker2
+     mem_limit: 2048m
+     mem_reservation: 100m
+     ports:
+        - "38080:8080"
+        - "34848:4848"
+     environment:
+        - ADMIN_USER=admin
+        - ADMIN_PASSWORD=secret    
+     depends_on:
+            - db
+     volumes:
+     - ./deployments:/opt/payara/deployments
+     networks:
+        - ingress         
+         
 networks:
   mired:
     driver: macvlan
-    driver_opts:
-      parent: eth0
     ipam:
       config:
-        - subnet: "192.168.99.1/24"
-          gateway: "192.168.99.1"
+        - subnet: "192.168.0.1/24"
+          gateway: "192.168.0.1"

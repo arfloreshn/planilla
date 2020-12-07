@@ -4,11 +4,11 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
- 
-  
+
+
     <h:body>
         <ui:composition template="../../../WEB-INF/plantillas/formLayout.xhtml">
-         
+
             <ui:define name="content">
 
                 <div style="margin-top: 0px; height:800px">
@@ -107,7 +107,7 @@
                         <p:sticky target="toolbar"  />
 
                     </h:form>
-                     <br/>
+                    <br/>
                     <!-- <p:growl id="growl" life="3000" autoUpdate="true" showDetail="true"/> -->
                     <h:form id="Empleados">
 
@@ -123,7 +123,7 @@
                             </h:panelGrid>
                         </p:dialog>
 
-
+                        <!-- INFORMACION GENERAL DEL EMPLEADO -->
                         <p:panel id="grinfo" 
                                  header="Datos generales"
                                  toggleable="true" toggleSpeed="500">
@@ -142,7 +142,7 @@
                                                           required="true"
                                                           requiredMessage="El numero de identificación">
                                                 <f:validateLength minimum="10" maximum="15"/>
-                                                <p:ajax update="@this,nrodoc" event="blur" process="@this,nrodoc" partialSubmit="true"/>
+                                                <p:ajax update=":Empleados:trash" event="blur" process="@this,nrodoc" partialSubmit="true"/>
                                             </p:inputText>
                                             <p:message for="nrodoc" />
 
@@ -159,7 +159,7 @@
                                                                itemValue="#{p}"/>
                                                 <f:validateLongRange minimum="1" maximum="99"/>
                                                 <p:ajax event="change" 
-                                                        update="cbotipodoc"
+                                                        update=":Empleados:trash"
                                                         process="@this,cbotipodoc"
                                                         partialSubmit="true" >
 
@@ -174,7 +174,7 @@
                                                          requiredMessage="El apellido es obligatorio, favor ingresarlo"
                                                          onblur="javascript:this.value = this.value.toUpperCase();">
                                                 <f:validateLength minimum="3" maximum="60"/>
-                                                <p:ajax update="@this,lblape1" event="blur" process="@this" partialSubmit="true"/> 
+                                                <p:ajax update=":Empleados:trash" event="blur" process="@this,lblape1" partialSubmit="true"/> 
                                             </p:inputText>
                                             <p:message for="lblape1"/>
 
@@ -184,7 +184,7 @@
                                                          disabled="#{!empleadosBean.enable}"
                                                          label="Ingrese el segundo apellido"
                                                          onblur="javascript:this.value = this.value.toUpperCase();">
-                                                <p:ajax update="@this,lblape2" event="blur" process="@this" partialSubmit="true"/> 
+                                                <p:ajax update=":Empleados:trash" event="blur" process="@this,lblape2" partialSubmit="true"/> 
 
                                             </p:inputText>
                                             <p:message for="lblape2"/>
@@ -199,7 +199,7 @@
                                                          label="Ingrese los nombres del empleado" 
                                                          onblur="javascript:this.value = this.value.toUpperCase();">
                                                 <f:validateLength minimum="3" maximum="80"/>
-                                                <p:ajax update="@this,lblnom" event="blur" process="@this" partialSubmit="true"/> 
+                                                <p:ajax update=":Empleados:trash" event="blur" /> 
 
                                             </p:inputText>
                                             <p:message for="lblnom"/>
@@ -221,7 +221,7 @@
                                                           requiredMessage="Fecha de nacimiento obligatoria, favor ingresela"
                                                           pattern="dd/MM/yyyy"
                                                           >
-                                                <p:ajax update="@this,lblfecnac" event="blur" process="@this" partialSubmit="true"/> 
+                                                <p:ajax update=":Empleados:trash" event="blur" process="@this,lblfecnac" partialSubmit="true"/> 
                                             </p:datePicker>
                                             <p:message for="lblfecnac" />
 
@@ -234,16 +234,17 @@
                                                           showButtonBar="button" 
                                                           pattern="dd/MM/yyyy"
                                                           label="Fecha de ingreso del empleado">
-                                                <p:ajax update="@this,lblfecalt" event="blur" process="@this" partialSubmit="true"/> 
+                                                <p:ajax update=":Empleados:trash" event="blur" process="@this,lblfecalt" partialSubmit="true"/> 
                                             </p:datePicker>
                                             <p:message for="lblfecalt" />
+                                            
                                             <h:outputText value="Fecha de Baja"/>
-                                            <p:datePicker value="#{empleadosBean.empleados.fecBaja}" 
+                                            <p:datePicker id="lblfecbaja" value="#{empleadosBean.empleados.fecBaja}" 
                                                           disabled="#{!empleadosBean.enable}"
                                                           showButtonBar="button" 
                                                           pattern="dd/MM/yyyy"
                                                           label="Fecha de baja del empleado">
-                                                <p:ajax update="@this,lblfecalt" event="blur" process="@this,lblfecalt" partialSubmit="true"/> 
+                                                <p:ajax update=":Empleados:trash" event="blur" process="@this,lblfecbaja" partialSubmit="true"/> 
 
                                             </p:datePicker>
 
@@ -274,7 +275,7 @@
                                                               columns="2" >
                                                 <f:selectItem itemLabel="Femenino" itemValue="F"  noSelectionOption="true" />
                                                 <f:selectItem itemLabel="Masculino" itemValue="M" noSelectionOption="true"/>
-                                                <p:ajax update="optsexo" event="blur"  process="@this,optsexo" partialSubmit="true"/> 
+                                                <p:ajax update=":Empleados:trash" event="blur"  process="@this,optsexo" partialSubmit="true"/> 
 
                                             </p:selectOneRadio>
                                             <p:message for="optsexo"/>
@@ -292,7 +293,7 @@
                                                 <f:selectItems value="#{empleadosBean.listaTipoEmpleado}" 
                                                                var="c" itemLabel="#{c.Descripcion}" 
                                                                itemValue="#{c}"/>
-                                                 <p:ajax event="change"  update=":msjbox:messages"/>
+                                                <p:ajax event="change"  update=":msjbox:messages"/>
                                             </p:selectOneMenu>
                                             <p:message for="cbocategoria"/>
 
@@ -303,7 +304,7 @@
                                                             decimalPlaces="2"
                                                             decimalSeparator="." 
                                                             thousandSeparator=",">
-                                                <p:ajax update="@this,lblsueldo" event="blur" process="@this" partialSubmit="true"/> 
+                                                <p:ajax update=":Empleados:trash" event="blur" process="@this,lblsueldo" partialSubmit="true"/> 
                                             </p:inputNumber>
                                             <p:message for="lblsueldo"/>
 
@@ -336,6 +337,12 @@
 
                         </p:panel>
                         <br/>
+
+                        <p:messages id="trash"  showSummary="test" showDetail="true" closable="true">
+                            <p:autoUpdate />
+                        </p:messages>
+
+                        <!-- DATOS COMPLEMENTARIOS -->
                         <p:panel id="datadd"  header="Datos complementarios" toggleable="true" closable="true" toggleSpeed="500" closeSpeed="500"> 
                             <p:tabView id="tabview"  cache="true" 
                                        >
@@ -355,7 +362,7 @@
                                                            itemLabel="#{ca.NomCargo}"
                                                            itemValue="#{ca.id}"
                                                            />
-                                             <p:ajax event="change"  update=":msjbox:messages"/>
+                                            <p:ajax event="change"  update=":msjbox:messages"/>
                                         </p:selectOneMenu>
                                         <p:message for="cbocargo"/>
 
@@ -373,7 +380,7 @@
                                                            itemLabel="#{p.NomProfesion}"
                                                            itemValue="#{p}"
                                                            />
-                                             <p:ajax event="change"  update=":msjbox:messages"/>
+                                            <p:ajax event="change"  update=":msjbox:messages"/>
                                         </p:selectOneMenu>
 
                                         <p:outputLabel for="cbolocacion" value="Labora en departamento"/>
@@ -389,7 +396,7 @@
                                                            itemLabel="#{ubi.nomDepto}"
                                                            itemValue="#{ubi}"
                                                            />
-                                             <p:ajax event="change"  update=":msjbox:messages"/>
+                                            <p:ajax event="change"  update=":msjbox:messages"/>
                                         </p:selectOneMenu>
                                         <p:message for="cbolocacion"/>                                    
                                     </h:panelGrid>
@@ -401,17 +408,17 @@
                                         <p:outputLabel for="cbopais" value="Pais"/>
                                         <p:selectOneMenu id="cbopais" 
                                                          filter="true" filterMatchMode="startsWith"
-                                                         required="true" 
+                                                         required="true"  
                                                          disabled="#{!empleadosBean.enable}"
                                                          value="#{empleadosBean.empleados.tpais.id}"
                                                          valueChangeListener="#{empleadosBean.oncboPais}">
-                                            <f:selectItem itemLabel="-- Seleccione el Pais --" itemValue=""/>
-                                            <f:selectItems value="#{empleadosBean.listarPais}" var="p" 
+                                            <f:selectItem  itemLabel="-- Seleccione el Pais --" itemValue=""/>
+                                            <f:selectItems  value="#{empleadosBean.listarPais}" var="p" 
                                                            itemLabel="#{p.NomPais}"
-                                                           itemValue="#{p}"
+                                                           itemValue="#{p}" 
                                                            />
-                                            
-                                            <p:ajax event="change" update="cbodepto" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
+
+                                            <p:ajax  update="cbodepto" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
                                         </p:selectOneMenu>
                                         <p:message for="cbopais"/>
 
@@ -428,9 +435,9 @@
                                                            itemLabel="#{d.NomDepto}"
                                                            itemValue="#{d.id}" rendered="true"
                                                            />
-                                        
-                                          <p:ajax update="cbomuni" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
-                                       
+
+                                            <p:ajax update="cbomuni" onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
+
                                         </p:selectOneMenu>
                                         <p:message for="cbodepto"/>
 
@@ -510,8 +517,9 @@
                                 </p:tab>
                             </p:tabView>
                         </p:panel>
- <br/>
-                 
+                        <br/>
+
+                        <!-- PANEL DE LA FOTO -->
                         <p:panel id="panelfoto" header="Cambiar fotografía" 
                                  toggleable="true" toggleSpeed="500"
                                  closable="true" closeSpeed="500"
@@ -534,17 +542,17 @@
                                           update=":Empleados:fotografia"
                                           >
                             </p:fileUpload>
-                  
-                            
+
+
                         </p:panel>
 
-
+                        <!-- MENSAJE DE ESPERA -->
                         <p:dialog widgetVar="statusDialog" modal="true" 
                                   draggable="false" 
                                   closable="false" 
                                   resizable="false" 
                                   showHeader="false">
-                            <p:graphicImage name="#{homeBean.homeUrl}/resources/images/gifs/5.gif" />
+                            <p:graphicImage  library="images" name="gifs/5.gif" />
                         </p:dialog>
 
                     </h:form>
@@ -569,21 +577,21 @@
                             </p:column>
 
                             <p:column filterBy="#{emp.primerApellido}" 
-                                 headerText="1er Apellido" style="width:10%; font-size: 10px ">
+                                      headerText="1er Apellido" style="width:10%; font-size: 10px ">
                                 <h:outputText value="#{emp.primerApellido}"> </h:outputText> 
                             </p:column>
-                            
+
                             <p:column filterBy="#{emp.segundoApellido}" 
-                                 headerText="2do Apellido" style="width:10%; font-size: 10px ">
+                                      headerText="2do Apellido" style="width:10%; font-size: 10px ">
                                 <h:outputText value="#{emp.segundoApellido}"> </h:outputText> 
                             </p:column>
 
                             <p:column filterBy="#{emp.nombres}" 
-                                 headerText="Nombres" style="width:10%; font-size: 10px ">
+                                      headerText="Nombres" style="width:10%; font-size: 10px ">
                                 <h:outputText value="#{emp.nombres}"> </h:outputText> 
                             </p:column>
 
-                            
+
                             <p:column headerText="Fec. Ingreso" style="width: 10%; font-size: 10px ">
                                 <h:outputText value="#{emp.fecAlta}"> </h:outputText> 
                             </p:column>
@@ -632,5 +640,5 @@
 
         </ui:composition>
     </h:body>
-       
+
 </html>
